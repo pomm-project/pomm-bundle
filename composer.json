@@ -9,6 +9,7 @@
     "require": {
         "php": ">=5.4.4",
         "pomm-project/foundation": "~2.0@dev",
+        "pomm-project/pomm-symfony-bridge": "dev-master",
         "symfony/framework-bundle": "~2.5"
     },
     "suggest": {
