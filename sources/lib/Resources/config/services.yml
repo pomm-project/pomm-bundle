@@ -2,3 +2,8 @@ services:
     pomm:
         class: PommProject\Foundation\Pomm
         arguments: ["%pomm.configuration%"]
+    pomm.twig_extension:
+        class: "PommProject\\PommBundle\\Twig\\Extension\\ProfilerExtension"
+        arguments: ['@Twig.loader']
+        tags:
+            - { name: twig.extension }
