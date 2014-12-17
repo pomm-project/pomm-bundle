@@ -1,0 +1,4 @@
+services:
+    pomm:
+        class: PommProject\Foundation\Pomm
+        arguments: ["%pomm.configuration%"]
