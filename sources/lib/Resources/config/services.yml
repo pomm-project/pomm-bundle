@@ -2,6 +2,11 @@ services:
     pomm:
         class: PommProject\Foundation\Pomm
         arguments: ["%pomm.configuration%"]
+    pomm.data_collector:
+        class: "PommProject\\SymfonyBridge\\DatabaseDataCollector"
+        arguments: ['@pomm']
+        tags:
+            - { name: data_collector, template: "@Pomm/Profiler/db.html.twig", id: "db"}
     pomm.twig_extension:
         class: "PommProject\\PommBundle\\Twig\\Extension\\ProfilerExtension"
         arguments: ['@Twig.loader']
