@@ -1,26 +1,32 @@
 {
-    "name": "pomm-project/pomm-bundle",
-    "type": "library",
-    "description": "The Symfony2 bundle for Postgresql Object Model Manager",
-    "keywords": ["orm", "postgresql", "database", "symfony"],
-    "homepage": "http://www.pomm-project.org",
-    "license": "MIT",
-    "authors": [ { "name": "Grégoire HUBERT", "email": "hubert.greg@gmail.com", "homepage": "http://www.coolkeums.org" } ],
-    "require": {
-        "php": ">=5.4.4",
-        "pomm-project/foundation": "~2.0@dev",
-        "pomm-project/pomm-symfony-bridge": "dev-master",
-        "symfony/framework-bundle": "~2.5",
-        "jdorn/sql-formatter": "~1.2"
-    },
-    "suggest": {
-        "symfony/web-profiler-bundle": "Display queries log",
-        "pomm-project/model-manager": "Model Manager for the Pomm database framework",
-        "pomm-project/cli": "Command line interface for Pomm project"
-    },
-    "autoload": {
-        "psr-4": {
-            "PommProject\\PommBundle\\": "sources/lib"
-        }
+  "name": "pomm/pomm-bundle",
+  "type": "library",
+  "description": "The Symfony2 bundle for Pomm2",
+  "keywords": ["orm", "postgresql", "database", "symfony", "pomm"],
+  "homepage": "http://www.pomm-project.org",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Grégoire HUBERT",
+      "email": "hubert.greg@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">=5.4.4",
+    "pomm/pomm": "2.0.*@dev",
+    "symfony/framework-bundle": "~2.5"
+  },
+  "require-dev": {
+    "symfony/console": "~2.5"
+  },
+  "suggest": {
+      "symfony/web-profiler-bundle": "Display queries log"
+  },
+  "autoload": {
+    "psr-4": {
+      "PommProject\\PommBundle\\": "sources/lib/"
+    }
+  },
+  "minimum-stability": "dev"
 }
+
