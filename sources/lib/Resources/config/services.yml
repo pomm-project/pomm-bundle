@@ -12,3 +12,35 @@ services:
         arguments: ['@Twig.loader']
         tags:
             - { name: twig.extension }
+    pomm.commands.inspect_database:
+        class: "PommProject\Cli\Command\InspectDatabase"
+        tags:
+            -  { name: console.command }
+    pomm.commands.inspect_schema:
+        class: "PommProject\Cli\Command\InspectSchema"
+        tags:
+            -  { name: console.command }
+    pomm.commands.inspect_relation:
+        class: "PommProject\Cli\Command\InspectRelation"
+        tags:
+            -  { name: console.command }
+    pomm.commands.generate_relation_structure:
+        class: "PommProject\Cli\Command\GenerateRelationStructure"
+        tags:
+            -  { name: console.command }
+    pomm.commands.generate_relation_model:
+        class: "PommProject\Cli\Command\GenerateRelationModel"
+        tags:
+            -  { name: console.command }
+    pomm.commands.generate_entity:
+        class: "PommProject\Cli\Command\GenerateEntity"
+        tags:
+            -  { name: console.command }
+    pomm.commands.generate_for_relation:
+        class: "PommProject\Cli\Command\GenerateForRelation"
+        tags:
+            -  { name: console.command }
+    pomm.commands.generate_for_schema:
+        class: "PommProject\Cli\Command\GenerateForSchema"
+        tags:
+            -  { name: console.command }
