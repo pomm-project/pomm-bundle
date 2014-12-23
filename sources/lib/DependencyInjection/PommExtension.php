@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * This file is part of the PommProject/PommBundle package.
+ *
+ * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace PommProject\PommBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -9,8 +16,24 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
+/**
+ * PommExtension
+ *
+ * DIC extension
+ *
+ * @package PommBundle
+ * @copyright 2014 Grégoire HUBERT
+ * @author Nicolas JOSEPH
+ * @license X11 {@link http://opensource.org/licenses/mit-license.php}
+ * @see Extension
+ */
 class PommExtension extends Extension
 {
+    /**
+     * load
+     *
+     * @see Extension
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -19,6 +42,16 @@ class PommExtension extends Extension
         $this->configure($configs, $container);
     }
 
+    /**
+     * configure
+     *
+     * Configure the DIC using configuration file.
+     *
+     * @access public
+     * @param  array            $configs
+     * @param  ContainerBuilder $container
+     * @return null
+     */
     public function configure(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();
@@ -34,7 +67,16 @@ class PommExtension extends Extension
         }
     }
 
-    private function getLogger($config)
+    /**
+     * getLogger
+     *
+     * Return a logger reference is any.
+     *
+     * @access private
+     * @param  array    $config
+     * @return Reference|null
+     */
+    private function getLogger(array $config)
     {
         $logger = null;
 

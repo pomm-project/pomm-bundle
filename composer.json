@@ -7,6 +7,10 @@
   "license": "MIT",
   "authors": [
     {
+      "name": "Nicolas JOSEPH",
+      "email": "nicolas.joseph@homecomputing.fr"
+    },
+    {
       "name": "Grégoire HUBERT",
       "email": "hubert.greg@gmail.com"
     }
@@ -27,6 +31,11 @@
       "PommProject\\PommBundle\\": "sources/lib/"
     }
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+  "extra": {
+      "branch-alias": {
+          "dev-master": "2.0-dev"
+      }
+  }
 }
 
