@@ -38,3 +38,27 @@ pomm:
     logger:
         service: '@logger'
 ```
+
+## Command line interface
+
+The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `app/console` utility. It is possible to browse the database or to generate model files. 
+
+```
+$ ./app/console pomm:generate:relation-all -d src -a 'AppBundle\Model' db student
+```
+
+## Using Pomm from the controller
+
+The Pomm service is available in the DIC as any other service:
+
+```php
+    function myAction($name)
+    {
+        $students = $this->get('pomm')['db']
+            ->getModel('\AppBundle\Model\Db\PublicSchema\StudentModel')
+            ->findWhere('name = $*', [$name])
+            ;
+
+        …
+```
+
