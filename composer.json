@@ -20,6 +20,7 @@
     "pomm-project/foundation": "2.0.*@dev",
     "pomm-project/model-manager": "2.0.*@dev",
     "pomm-project/cli": "2.0.*@dev",
+    "pomm-project/pomm-symfony-bridge": "~2.0@dev",
     "symfony/framework-bundle": "~2.5"
   },
   "require-dev": {
