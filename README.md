@@ -2,11 +2,11 @@
 
 Although this bundle usable already, it is a work in progress. New features will be added.
 
-This bundle provides a `pomm` service to use Pomm2 [Model Manager](https://github.com/pomm-project/ModelManager) with Symfony.
+This bundle provides a `pomm` service to use the Pomm2 [Model Manager](https://github.com/pomm-project/ModelManager) with Symfony.
 
 ## Installation
 
-Simply require `pomm-project/pomm-bundle: 2.0.*@dev` in your `composer.json` file and launch the `update` command.
+Simply require `pomm-project/pomm-bundle: 2.0.*@dev` in your `composer.json` file and run the `update` command.
 
 ## Setup
 
