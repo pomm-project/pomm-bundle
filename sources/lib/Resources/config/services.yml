@@ -7,6 +7,9 @@ services:
         arguments: ['@pomm']
         tags:
             - { name: data_collector, template: "@Pomm/Profiler/db.html.twig", id: "db"}
+    pomm.controller.profiler:
+        class: "PommProject\\SymfonyBridge\\Controller\\PommProfilerController"
+        arguments: ['@router', '@profiler', '@twig', '@pomm']
     pomm.twig_extension:
         class: "PommProject\\PommBundle\\Twig\\Extension\\ProfilerExtension"
         arguments: ['@Twig.loader']
