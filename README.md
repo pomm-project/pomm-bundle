@@ -39,6 +39,13 @@ pomm:
         service: '@logger'
 ```
 
+And in `routing_dev.yml`:
+
+```yml
+_pomm:
+    resource: "@PommBundle/Resources/config/routing.yml"
+```
+
 ## Command line interface
 
 The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `app/console` utility. It is possible to browse the database or to generate model files. 
