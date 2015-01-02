@@ -44,6 +44,7 @@ And in `routing_dev.yml`:
 ```yml
 _pomm:
     resource: "@PommBundle/Resources/config/routing.yml"
+    prefix:   /_pomm
 ```
 
 ## Command line interface

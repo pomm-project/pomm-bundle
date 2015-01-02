@@ -1,4 +1,4 @@
 _pomm_profiler_explain:
-    path: /_pomm/explain/{token}/{index_query}
+    path: /explain/{token}/{index_query}
     defaults: { _controller: pomm.controller.profiler:explainAction }
     methods: [GET]
