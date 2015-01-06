@@ -56,7 +56,19 @@ _pomm:
 
 ## Command line interface
 
-The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `app/console` utility. It is possible to browse the database or to generate model files. 
+The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `app/console` utility. It is possible to browse the database or to generate model files. Even though the CLI interfaces with the Symfony console utility, it still needs to find a file named `.pomm_cli_bootstrap.php` in the project root directory. Here is a sample content:
+
+```php
+<?php
+
+$kernel = new \AppKernel('dev', true);
+$kernel->boot();
+
+return $kernel->getContainer()
+    ->get('pomm');
+```
+
+It is now possible to generate the model or inspecting the database using the command line:
 
 ```
 $ ./app/console pomm:generate:relation-all -d src -a 'AppBundle\Model' db student
