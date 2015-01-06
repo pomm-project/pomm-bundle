@@ -36,10 +36,14 @@ class PommExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
+        $loader->load('pomm.yml');
 
-        $this->configure($configs, $container);
+        $config = $this->configure($configs, $container);
+
+        if ($config['web_profiler'] === true) {
+            $loader->load('profiler.yml');
+        }
     }
 
     /**
@@ -65,6 +69,8 @@ class PommExtension extends Extension
             $container->getDefinition('pomm')
                 ->addMethodCall('setLogger', [$this->getLogger($config)]);
         }
+
+        return $config;
     }
 
     /**

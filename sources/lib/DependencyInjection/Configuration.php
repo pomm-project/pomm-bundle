@@ -51,6 +51,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('service')->end()
                     ->end()
                 ->end()
+                ->scalarNode('web_profiler')->defaultFalse()->end()
             ->end();
 
         return $treeBuilder;

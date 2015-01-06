@@ -2,19 +2,6 @@ services:
     pomm:
         class: PommProject\Foundation\Pomm
         arguments: ["%pomm.configuration%"]
-    pomm.data_collector:
-        class: "PommProject\\SymfonyBridge\\DatabaseDataCollector"
-        arguments: ['@pomm']
-        tags:
-            - { name: data_collector, template: "@Pomm/Profiler/db.html.twig", id: "db"}
-    pomm.controller.profiler:
-        class: "PommProject\\SymfonyBridge\\Controller\\PommProfilerController"
-        arguments: ['@router', '@profiler', '@twig', '@pomm']
-    pomm.twig_extension:
-        class: "PommProject\\PommBundle\\Twig\\Extension\\ProfilerExtension"
-        arguments: ['@Twig.loader']
-        tags:
-            - { name: twig.extension }
     pomm.commands.inspect_database:
         class: "PommProject\Cli\Command\InspectDatabase"
         tags:
