@@ -3,7 +3,7 @@ services:
         class: "PommProject\\SymfonyBridge\\DatabaseDataCollector"
         arguments: ['@pomm']
         tags:
-            - { name: data_collector, template: "@Pomm/Profiler/db.html.twig", id: "db"}
+            - { name: data_collector, template: "@Pomm/Profiler/db.html.twig", id: "pomm"}
     pomm.controller.profiler:
         class: "PommProject\\SymfonyBridge\\Controller\\PommProfilerController"
         arguments: ['@router', '@profiler', '@twig', '@pomm']
