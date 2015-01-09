@@ -59,7 +59,7 @@ _pomm:
 The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `app/console` utility. It is possible to browse the database or to generate model files. 
 
 ```
-$ ./app/console pomm:generate:relation-all -d src -a 'AppBundle\Model' db student
+$ ./app/console pomm:generate:relation-all -d src -a 'AppBundle\Model' my_db1 student
 ```
 
 ## Using Pomm from the controller
@@ -69,8 +69,8 @@ The Pomm service is available in the DIC as any other service:
 ```php
     function myAction($name)
     {
-        $students = $this->get('pomm')['db']
-            ->getModel('\AppBundle\Model\Db\PublicSchema\StudentModel')
+        $students = $this->get('pomm')['my_db1']
+            ->getModel('\AppBundle\Model\MyDb1\PublicSchema\StudentModel')
             ->findWhere('name = $*', [$name])
             ;
 
