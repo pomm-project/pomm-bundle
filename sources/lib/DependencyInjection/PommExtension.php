@@ -40,10 +40,6 @@ class PommExtension extends Extension
         $loader->load('pomm.yml');
 
         $config = $this->configure($configs, $container);
-
-        if ($config['web_profiler'] === true) {
-            $loader->load('profiler.yml');
-        }
     }
 
     /**

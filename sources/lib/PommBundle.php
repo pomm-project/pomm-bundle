@@ -10,6 +10,8 @@
 namespace PommProject\PommBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
 /**
  * PommBundle
@@ -24,6 +26,18 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class PommBundle extends Bundle
 {
+    /**
+     * build
+     *
+     * @see Bundle
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new DependencyInjection\Compiler\ProfilerPass);
+    }
+
     /**
      * getContainerExtension
      *

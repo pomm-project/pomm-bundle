@@ -39,14 +39,7 @@ pomm:
         service: '@logger'
 ```
 
-If you want a nice query debugger, enable it in your `config_dev.yml`:
-
-```yml
-pomm:
-    web_profiler: true
-```
-
-And add the corresponding routes in your `routing_dev.yml`:
+And in `routing_dev.yml`:
 
 ```yml
 _pomm:
