@@ -12,6 +12,12 @@ services:
         arguments: ['@Twig.loader']
         tags:
             - { name: twig.extension }
+    pomm.commands.inspect_config:
+        class: "PommProject\Cli\Command\InspectConfig"
+        calls:
+            - ["setPomm", ["@pomm"]]
+        tags:
+            -  { name: console.command }
     pomm.commands.inspect_database:
         class: "PommProject\Cli\Command\InspectDatabase"
         calls:
