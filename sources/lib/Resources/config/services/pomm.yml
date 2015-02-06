@@ -4,7 +4,7 @@ services:
         arguments: ["%pomm.configuration%"]
     pomm.data_collector:
         class: "PommProject\\SymfonyBridge\\DatabaseDataCollector"
-        arguments: ['@pomm']
+        arguments: ['@pomm', '@?debug.stopwatch']
         tags:
             - { name: data_collector, template: "@Pomm/Profiler/db.html.twig", id: "pomm"}
     pomm.twig_extension:
