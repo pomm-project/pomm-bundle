@@ -87,5 +87,5 @@ The Pomm service is available in the DIC as any other service:
         …
 ```
 
-It is now possible to tune and create a model layer as described in [the quick start guide](http://pomm-project.org/documentation/sandbox2). 
+It is now possible to tune and create a model layer as described in [the quick start guide](http://www.pomm-project.org/documentation/sandbox2). 
 
