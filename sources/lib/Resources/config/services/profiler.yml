@@ -1,0 +1,6 @@
+services:
+    data.collector.time:
+        class: "%data_collector.time.class%"
+        arguments: ['@?kernel', '@?debug.stopwatch']
+        tags:
+            -  { name: data_collector, template: "@Pomm/Collector/time.html.twig", id: "time"}

@@ -37,7 +37,11 @@ class PommExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $loader->load('services/pomm.yml');
+
+        if ($container->hasParameter('data_collector.time.class')) {
+            $loader->load('services/profiler.yml');
+        }
 
         $config = $this->configure($configs, $container);
     }
