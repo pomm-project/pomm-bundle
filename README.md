@@ -34,7 +34,7 @@ parameters:
     db_name1: my_db_name
     db_user1: user
     db_password1: pass
-    
+
     db_host2: 127.0.0.1
 #   etc.
 ```
@@ -66,7 +66,7 @@ _pomm:
 
 ## Command line interface
 
-The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `app/console` utility. It is possible to browse the database or to generate model files. 
+The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `app/console` utility. It is possible to browse the database or to generate model files.
 
 ```
 $ ./app/console pomm:generate:relation-all -d src -a 'AppBundle\Model' my_db1 student
@@ -87,5 +87,24 @@ The Pomm service is available in the DIC as any other service:
         …
 ```
 
-It is now possible to tune and create a model layer as described in [the quick start guide](http://www.pomm-project.org/documentation/sandbox2). 
+It is now possible to tune and create a model layer as described in [the quick start guide](http://www.pomm-project.org/documentation/sandbox2).
 
+## Param converter
+
+This bundle provide a [param
+converter](http://symfony.com/doc/master/bundles/SensioFrameworkExtraBundle/annotations/converters.html)
+to convert request to a flexible entity. The converter search in the request the
+parameters with names matching primary key.
+
+You can specify witch connexion use in the option:
+
+```php
+
+/**
+ * @ParamConverter(options={"connection": "my_db2"})
+ */
+public function getAction(Student $student)
+```
+
+This feature require
+[sensio/framework-extra-bundle](http://symfony.com/doc/master/bundles/SensioFrameworkExtraBundle/index.html).
