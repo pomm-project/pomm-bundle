@@ -12,6 +12,12 @@ services:
         arguments: ['@Twig.loader']
         tags:
             - { name: twig.extension }
+    pomm.converter.entity:
+        class: "PommProject\\PommBundle\\Request\\ParamConverter\\EntityParamConverter"
+        arguments: ['@pomm']
+        tags:
+            - { name: request.param_converter, converter: pomm.entity }
+
     pomm.commands.inspect_config:
         class: "PommProject\Cli\Command\InspectConfig"
         calls:
