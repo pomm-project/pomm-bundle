@@ -34,7 +34,7 @@ class EntityParamConverter implements ParamConverterInterface
         $options = $this->getOptions($configuration);
 
         $model = $this->pomm[$options['connection']]
-            ->getModel('\\AppBundle\\Model\\ConfigModel');
+            ->getModel($options['model']);
 
         $entity = $model->findByPk($this->getPk($model, $request));
 
@@ -47,6 +47,7 @@ class EntityParamConverter implements ParamConverterInterface
     {
         return array_replace([
             'connection' => key(current($this->pomm)),
+            'model' => $configuration->getClass() . 'Model',
         ], $configuration->getOptions());
     }
 

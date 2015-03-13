@@ -106,5 +106,17 @@ You can specify witch connexion use in the option:
 public function getAction(Student $student)
 ```
 
+By default, the model used for find the entity is deduce by adding ``Model`` to
+entity class name. If you have a different class name, you can use the ``model``
+option:
+
+```php
+
+/**
+ * @ParamConverter(options={"model": "StudentModel"})
+ */
+public function getAction(Student $student)
+```
+
 This feature require
 [sensio/framework-extra-bundle](http://symfony.com/doc/master/bundles/SensioFrameworkExtraBundle/index.html).
