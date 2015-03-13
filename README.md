@@ -101,7 +101,7 @@ You can specify witch connexion use in the option:
 ```php
 
 /**
- * @ParamConverter(options={"connection": "my_db2"})
+ * @ParamConverter("student", options={"connection": "my_db2"})
  */
 public function getAction(Student $student)
 ```
@@ -113,7 +113,7 @@ option:
 ```php
 
 /**
- * @ParamConverter(options={"model": "StudentModel"})
+ * @ParamConverter("student", options={"model": "StudentModel"})
  */
 public function getAction(Student $student)
 ```
