@@ -25,7 +25,7 @@ class EntityParamConverter implements ParamConverterInterface
 
         $reflection = new \ReflectionClass($configuration->getClass());
 
-        return $reflection->isSubclassOf("\\PommProject\\ModelManager\\Model\\FlexibleEntity");
+        return $reflection->implementsInterface("PommProject\\ModelManager\\Model\\FlexibleEntity\\FlexibleEntityInterface");
     }
 
     public function apply(Request $request, ParamConverter $configuration)
