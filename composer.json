@@ -28,7 +28,8 @@
     "symfony/console": "~2.5"
   },
   "suggest": {
-      "symfony/web-profiler-bundle": "Display queries log"
+      "symfony/web-profiler-bundle": "Display queries log",
+      "sensio/distribution-bundle": "To use the entity param converter"
   },
   "autoload": {
     "psr-4": {
