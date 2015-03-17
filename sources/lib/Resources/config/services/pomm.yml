@@ -2,6 +2,9 @@ services:
     pomm:
         class: PommProject\Foundation\Pomm
         arguments: ["%pomm.configuration%"]
+    pomm.default_session:
+        class: PommProject\Foundation\Session\Session
+        factory: ['@pomm', getDefaultSession]
     pomm.data_collector:
         class: "PommProject\\SymfonyBridge\\DatabaseDataCollector"
         arguments: ['@pomm', '@?debug.stopwatch']

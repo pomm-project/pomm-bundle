@@ -33,8 +33,7 @@ class EntityParamConverter implements ParamConverterInterface
         $name = $configuration->getName();
         $options = $this->getOptions($configuration);
 
-        $model = $this->pomm[$options['connection']]
-            ->getModel($options['model']);
+        $model = $options['session']->getModel($options['model']);
 
         $entity = $model->findByPk($this->getPk($model, $request));
 
@@ -45,10 +44,18 @@ class EntityParamConverter implements ParamConverterInterface
 
     private function getOptions(ParamConverter $configuration)
     {
-        return array_replace([
-            'connection' => key(current($this->pomm)),
+        $options = array_replace([
             'model' => $configuration->getClass() . 'Model',
         ], $configuration->getOptions());
+
+        if (isset($options['connection'])) {
+            $options['session'] = $this->pomm[$options['session']];
+        }
+        else {
+            $options['session'] = $this->pomm->getDefaultSession();
+        }
+
+        return $options;
     }
 
     private function getPk(Model $model, Request $request)
