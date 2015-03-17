@@ -43,6 +43,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode('dsn')->isRequired()->end()
                             ->scalarNode('class:session_builder')->end()
+                            ->scalarNode('pomm:default')->end()
                         ->end()
                     ->end()
                 ->end()

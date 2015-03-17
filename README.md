@@ -49,6 +49,7 @@ pomm:
     configuration:
         my_db1:
             dsn: 'pgsql://%db_user1%:%db_password1%@%db_host1%:%db_port1%/%db_name1%'
+            pomm:default: true
         my_db2:
             dsn: 'pgsql://%db_user2%:%db_password2%@%db_host2%:%db_port2%/%db_name2%'
             class:session_builder: '\PommProject\ModelManager\SessionBuilder'
@@ -79,7 +80,7 @@ The Pomm service is available in the DIC as any other service:
 ```php
     function myAction($name)
     {
-        $students = $this->get('pomm')['my_db1']
+        $students = $this->get('pomm')['my_db2']
             ->getModel('\AppBundle\Model\MyDb1\PublicSchema\StudentModel')
             ->findWhere('name = $*', [$name])
             ;
