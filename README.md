@@ -1,8 +1,12 @@
-# Pomm2 bundle for Symfony.
+# Pomm2 bundle for Symfony
 
 Although this bundle usable already, it is a work in progress. New features will be added.
 
 This bundle provides a `pomm` service to use the Pomm2 [Model Manager](https://github.com/pomm-project/ModelManager) with Symfony.
+
+**Note:**
+
+If you are looking for a bundle for Pomm 1.x then look up for `pomm/pomm-bundle` on packagist.
 
 ## Installation
 
