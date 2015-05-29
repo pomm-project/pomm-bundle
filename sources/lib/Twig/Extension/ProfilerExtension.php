@@ -31,7 +31,6 @@ class ProfilerExtension extends \Twig_Extension
      *
      * @access public
      * @param  FilesystemLoader $loader
-     * @return null
      */
     public function __construct(FilesystemLoader $loader)
     {
