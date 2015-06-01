@@ -5,16 +5,6 @@ services:
     pomm.default_session:
         class: PommProject\Foundation\Session\Session
         factory: ['@pomm', getDefaultSession]
-    pomm.data_collector:
-        class: "PommProject\\SymfonyBridge\\DatabaseDataCollector"
-        arguments: ['@pomm', '@?debug.stopwatch']
-        tags:
-            - { name: data_collector, template: "@Pomm/Profiler/db.html.twig", id: "pomm"}
-    pomm.twig_extension:
-        class: "PommProject\\PommBundle\\Twig\\Extension\\ProfilerExtension"
-        arguments: ['@Twig.loader']
-        tags:
-            - { name: twig.extension }
     pomm.converter.entity:
         class: "PommProject\\PommBundle\\Request\\ParamConverter\\EntityParamConverter"
         arguments: ['@pomm']
