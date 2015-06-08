@@ -42,7 +42,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('dsn')->isRequired()->end()
-                            ->scalarNode('class:session_builder')->end()
+                            ->scalarNode('class:session_builder')->defaultValue('\PommProject\ModelManager\SessionBuilder')->end()
                             ->scalarNode('pomm:default')->end()
                         ->end()
                     ->end()
