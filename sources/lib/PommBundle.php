@@ -53,14 +53,6 @@ class PommBundle extends Bundle
      */
     public function shutdown()
     {
-        $pomm = $this->container->get('pomm');
-        $configurations = $this->container->getParameter('pomm.configuration');
-
-        foreach ($configurations as $name => $configuration) {
-            if ($pomm->hasSession($name)) {
-                $pomm[$name]->getConnection()
-                    ->close();
-            }
-        }
+        $this->container->get('pomm')->shutdown();
     }
 }
