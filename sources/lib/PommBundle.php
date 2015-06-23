@@ -53,6 +53,6 @@ class PommBundle extends Bundle
      */
     public function shutdown()
     {
-        $pomm = $this->container->get('pomm')->shutdown();
+        $this->container->get('pomm')->shutdown();
     }
 }
