@@ -10,7 +10,27 @@ If you are looking for a bundle for Pomm 1.x then look up for `pomm/pomm-bundle`
 
 ## Installation
 
-Simply require `pomm-project/pomm-bundle: 2.0.*@dev` in your `composer.json` file and run the `update` command.
+As Pomm2 is not considered as stable, the install process depends on your `composer.json` `minimum-stability` value. 
+
+### "minimum-stability": "stable"
+
+Require all Pomm2 depencencies manually :
+
+    "pomm-project/pomm-bundle": "2.0.*@dev",
+    "pomm-project/pomm-symfony-bridge": "2.0.*@dev",
+    "pomm-project/foundation": "2.0.*@dev",
+    "pomm-project/model-manager": "2.0.*@dev",
+    "pomm-project/cli": "2.0.*@dev"
+
+in your `composer.json` file and run the `update` command
+
+### "minimum-stability": "dev"
+
+Simply require 
+
+    "pomm-project/pomm-bundle": "2.0.*@dev",
+
+in your `composer.json` file and run the `update` command.
 
 ## Setup
 
