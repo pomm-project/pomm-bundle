@@ -18,10 +18,9 @@
   "require": {
     "php": ">=5.4.4",
     "jdorn/sql-formatter": "~1.2",
-    "pomm-project/foundation": "2.0.*@dev",
-    "pomm-project/model-manager": "2.0.*@dev",
-    "pomm-project/cli": "2.0.*@dev",
-    "pomm-project/pomm-symfony-bridge": "~2.0@dev",
+    "pomm-project/model-manager": "~2.0",
+    "pomm-project/cli": "~2.0",
+    "pomm-project/pomm-symfony-bridge": "~2.0",
     "symfony/framework-bundle": "~2.6"
   },
   "require-dev": {
@@ -36,7 +35,6 @@
       "PommProject\\PommBundle\\": "sources/lib/"
     }
   },
-  "minimum-stability": "dev",
   "extra": {
       "branch-alias": {
           "dev-master": "2.0-dev"
