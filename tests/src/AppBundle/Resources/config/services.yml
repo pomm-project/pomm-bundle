@@ -1,0 +1,4 @@
+services:
+    index_controller:
+        class: AppBundle\Controller\IndexController
+        arguments: ['@templating', '@pomm.default_session']

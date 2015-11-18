@@ -1,0 +1,12 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    locale:            en
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    database_user: postgres
+    database_password: 12345
+    database_host: localhost
+    database_port: 5432
+    database_name: pomm_test
