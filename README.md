@@ -1,5 +1,7 @@
 # Pomm2 bundle for Symfony
 
+[![Build Status](https://travis-ci.org/pomm-project/pomm-bundle.svg)](https://travis-ci.org/pomm-project/pomm-bundle)
+
 Although this bundle usable already, it is a work in progress. New features will be added.
 
 This bundle provides a `pomm` service to use the Pomm2 [Model Manager](https://github.com/pomm-project/ModelManager) with Symfony.
