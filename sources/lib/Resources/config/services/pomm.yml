@@ -1,67 +1,67 @@
 services:
     pomm:
-        class: PommProject\Foundation\Pomm
-        arguments: ["%pomm.configuration%"]
+        class: 'PommProject\Foundation\Pomm'
+        arguments: ['%pomm.configuration%']
     pomm.default_session:
-        class: PommProject\Foundation\Session\Session
+        class: 'PommProject\Foundation\Session\Session'
         factory: ['@pomm', getDefaultSession]
     pomm.converter.entity:
-        class: "PommProject\\PommBundle\\Request\\ParamConverter\\EntityParamConverter"
+        class: 'PommProject\PommBundle\Request\ParamConverter\EntityParamConverter'
         arguments: ['@pomm']
         tags:
             - { name: request.param_converter, converter: pomm.entity }
 
     pomm.commands.inspect_config:
-        class: "PommProject\Cli\Command\InspectConfig"
+        class: 'PommProject\Cli\Command\InspectConfig'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
     pomm.commands.inspect_database:
-        class: "PommProject\Cli\Command\InspectDatabase"
+        class: 'PommProject\Cli\Command\InspectDatabase'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
     pomm.commands.inspect_schema:
-        class: "PommProject\Cli\Command\InspectSchema"
+        class: 'PommProject\Cli\Command\InspectSchema'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
     pomm.commands.inspect_relation:
-        class: "PommProject\Cli\Command\InspectRelation"
+        class: 'PommProject\Cli\Command\InspectRelation'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
     pomm.commands.generate_relation_structure:
-        class: "PommProject\Cli\Command\GenerateRelationStructure"
+        class: 'PommProject\Cli\Command\GenerateRelationStructure'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
     pomm.commands.generate_relation_model:
-        class: "PommProject\Cli\Command\GenerateRelationModel"
+        class: 'PommProject\Cli\Command\GenerateRelationModel'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
     pomm.commands.generate_entity:
-        class: "PommProject\Cli\Command\GenerateEntity"
+        class: 'PommProject\Cli\Command\GenerateEntity'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
     pomm.commands.generate_for_relation:
-        class: "PommProject\Cli\Command\GenerateForRelation"
+        class: 'PommProject\Cli\Command\GenerateForRelation'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
     pomm.commands.generate_for_schema:
-        class: "PommProject\Cli\Command\GenerateForSchema"
+        class: 'PommProject\Cli\Command\GenerateForSchema'
         calls:
-            - ["setPomm", ["@pomm"]]
+            - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
