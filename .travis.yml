@@ -21,6 +21,7 @@ services: postgresql
 
 before_install:
     - cd tests
+    - composer self-update
 
     - psql -c 'CREATE DATABASE pomm_test' -U postgres -h 127.0.0.1 postgres
     - psql -c 'CREATE TABLE config (name character varying(25) PRIMARY KEY, value character varying(25))' -U postgres -h 127.0.0.1 pomm_test
