@@ -1,4 +1,10 @@
 {
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../"
+        }
+    ],
     "require": {
         "symfony/symfony": "~2.6",
         "symfony/monolog-bundle": "~2.4",
