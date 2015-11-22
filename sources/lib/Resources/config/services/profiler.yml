@@ -1,16 +1,16 @@
 services:
     data.collector.time:
-        class: "%data_collector.time.class%"
+        class: 'Symfony\Component\HttpKernel\DataCollector\TimeDataCollector'
         arguments: ['@?kernel', '@?debug.stopwatch']
         tags:
-            - { name: data_collector, template: "@Pomm/Collector/time.html.twig", id: "time"}
+            - { name: data_collector, template: '@Pomm/Collector/time.html.twig', id: 'time'}
     pomm.data_collector:
-        class: "PommProject\\SymfonyBridge\\DatabaseDataCollector"
+        class: 'PommProject\SymfonyBridge\DatabaseDataCollector'
         arguments: ['@pomm', '@?debug.stopwatch']
         tags:
-            - { name: data_collector, template: "@Pomm/Profiler/db.html.twig", id: "pomm"}
+            - { name: data_collector, template: '@Pomm/Profiler/db.html.twig', id: 'pomm'}
     pomm.twig_extension:
-        class: "PommProject\\PommBundle\\Twig\\Extension\\ProfilerExtension"
+        class: 'PommProject\PommBundle\Twig\Extension\ProfilerExtension'
         arguments: ['@Twig.loader']
         tags:
             - { name: twig.extension }
