@@ -1,0 +1,9 @@
+index:
+    path: /
+    defaults: { _controller: index_controller:indexAction }
+    methods: [GET]
+
+get:
+    path: /get/{name}
+    defaults: { _controller: index_controller:getAction }
+    methods: [GET]

@@ -1,0 +1,11 @@
+default:
+    suites:
+        default:
+            paths: [ %paths.base%/tests/Features ]
+            contexts:
+                - FeatureContext
+    extensions:
+        Behat\MinkExtension\ServiceContainer\MinkExtension:
+            base_url: 'http://localhost:8080'
+            goutte: ~
+            selenium2: ~
