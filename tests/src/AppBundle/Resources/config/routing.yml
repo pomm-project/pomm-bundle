@@ -7,3 +7,8 @@ get:
     path: /get/{name}
     defaults: { _controller: index_controller:getAction }
     methods: [GET]
+
+serialize:
+    path: /serialize/{name}
+    defaults: { _controller: index_controller:serializeAction }
+    methods: [GET]
