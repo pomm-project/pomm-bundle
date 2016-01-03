@@ -5,9 +5,10 @@ services:
         tags:
             - { name: data_collector, template: '@Pomm/Collector/time.html.twig', id: 'time'}
     pomm.data_collector:
-        class: 'PommProject\SymfonyBridge\DatabaseDataCollector'
+        class: 'PommProject\PommBundle\DataCollector\DatabaseDataCollector'
         arguments: ['@pomm', '@?debug.stopwatch']
         tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
             - { name: data_collector, template: '@Pomm/Profiler/db.html.twig', id: 'pomm'}
     pomm.twig_extension:
         class: 'PommProject\PommBundle\Twig\Extension\ProfilerExtension'
