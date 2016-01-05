@@ -24,7 +24,7 @@
     "symfony/framework-bundle": "~2.6|~3.0"
   },
   "require-dev": {
-    "symfony/console": "~2.5"
+    "symfony/console": "~2.6|~3.0"
   },
   "suggest": {
       "symfony/web-profiler-bundle": "Display queries log",
