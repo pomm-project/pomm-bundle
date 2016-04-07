@@ -2,6 +2,8 @@ services:
     pomm:
         class: 'PommProject\Foundation\Pomm'
         arguments: ['%pomm.configuration%']
+        configurator: ['@?pomm.data_collector.configurator', configure]
+
     pomm.default_session:
         class: 'PommProject\Foundation\Session\Session'
         factory: ['@pomm', getDefaultSession]
