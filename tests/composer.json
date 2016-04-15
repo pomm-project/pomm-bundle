@@ -34,11 +34,13 @@
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
         "post-install-cmd": [
+            "[ -L vendor/pomm-project/pomm-bundle ] || rm -rf vendor/pomm-project/pomm-bundle && ln -s ../../../ vendor/pomm-project/pomm-bundle",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ],
         "post-update-cmd": [
+            "[ -L vendor/pomm-project/pomm-bundle ] || rm -rf vendor/pomm-project/pomm-bundle && ln -s ../../../ vendor/pomm-project/pomm-bundle",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
