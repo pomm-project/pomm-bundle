@@ -22,3 +22,13 @@ property:
     path: /property
     defaults: { _controller: index_controller:propertyAction }
     methods: [GET]
+
+serviceModel:
+    path: /serviceModel
+    defaults: { _controller: index_controller:serviceModelAction }
+    methods: [GET]
+
+serviceContainer:
+    path: /serviceContainer
+    defaults: { _controller: index_controller:serviceContainerAction }
+    methods: [GET]

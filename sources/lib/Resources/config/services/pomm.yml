@@ -1,12 +1,8 @@
 services:
     pomm:
         class: 'PommProject\Foundation\Pomm'
-        arguments: ['%pomm.configuration%']
-        configurator: ['@?pomm.data_collector.configurator', configure]
+        configurator: ['@pomm.session_builder.configurator_chain', configure]
 
-    pomm.default_session:
-        class: 'PommProject\Foundation\Session\Session'
-        factory: ['@pomm', getDefaultSession]
     pomm.converter.entity:
         class: 'PommProject\PommBundle\Request\ParamConverter\EntityParamConverter'
         arguments: ['@pomm']
@@ -21,6 +17,31 @@ services:
         arguments: ['@pomm']
         tags:
             - { name: "property_info.type_extractor" }
+
+    pomm.session_builder:
+        class: 'PommProject\Foundation\SessionBuilder'
+        arguments:
+
+    pomm.session_builder.configurator:
+        class: 'PommProject\PommBundle\Model\Configurator'
+        arguments: [null]
+
+    pomm.session_builder.configurator_chain:
+        class: 'PommProject\PommBundle\Model\ChainConfigurator'
+        arguments: [['@pomm.session_builder.configurator', '@?pomm.data_collector.configurator']]
+
+    pomm.pooler.model:
+        class: 'PommProject\PommBundle\Model\ContainerModelPooler'
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: pomm.pooler }
+    pomm.pooler.model_layer:
+        class: 'PommProject\PommBundle\Model\ContainerModelLayerPooler'
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: pomm.pooler }
 
     pomm.commands.inspect_config:
         class: 'PommProject\Cli\Command\InspectConfig'
