@@ -60,7 +60,7 @@ pomm:
             pomm:default: true
         my_db2:
             dsn: 'pgsql://%db_user2%:%db_password2%@%db_host2%:%db_port2%/%db_name2%'
-            class:session_builder: '\PommProject\ModelManager\SessionBuilder'
+            session_builder: 'pomm.session_builder'
     logger:
         service: '@logger'
 ```
@@ -141,3 +141,18 @@ component to serialize entities.
 This bundle also provide [property
 info](https://symfony.com/doc/current/components/property_info.html) support to
 retrieve flexible entity properties informations.
+
+## Poolers as service
+
+If you need to add additional poolers into the session builder all you need to do is tag a service definition with `pomm.pooler`
+
+## Model and Model layer as a service
+
+Model and model layer objects can be registered as a service.
+For this to work properly you have to tag your service correctly and remove `class:session_builder` from configuration.
+
+Models must be tagged with `pomm.model` and layers with `pomm.model_layer`
+
+Both of those tags have the following parameters:
+ * `pooler` which is the name of a default pooler service, if left blank the default is used
+ * `session` which is the name of a default session service this is used from, if left blank the default is used
