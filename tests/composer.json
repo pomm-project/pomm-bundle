@@ -1,21 +1,15 @@
 {
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../"
-        }
-    ],
     "require": {
         "symfony/symfony": "~2.6",
         "symfony/monolog-bundle": "~2.4",
         "twig/extensions": "~1.0",
         "sensio/distribution-bundle": "~3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
-        "pomm-project/cli": "~2.0@dev",
-        "pomm-project/foundation": "~2.0@dev",
-        "pomm-project/pomm-bundle": "~2.0@dev",
-        "pomm-project/model-manager": "~2.0@dev",
-        "pomm-project/pomm-symfony-bridge": "~2.0@dev"
+        "pomm-project/cli": "dev-master",
+        "pomm-project/foundation": "dev-master",
+        "pomm-project/pomm-bundle": "dev-master",
+        "pomm-project/model-manager": "dev-master",
+        "pomm-project/pomm-symfony-bridge": "dev-master"
     },
     "require-dev": {
         "behat/mink-extension": "~2.0",
