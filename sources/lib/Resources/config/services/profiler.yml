@@ -9,11 +9,6 @@ services:
         arguments: [null,'@?debug.stopwatch']
         tags:
             - { name: data_collector, template: '@Pomm/Profiler/db.html.twig', id: 'pomm'}
-    pomm.twig_extension:
-        class: 'PommProject\PommBundle\Twig\Extension\ProfilerExtension'
-        arguments: ['@Twig.loader']
-        tags:
-            - { name: twig.extension }
     pomm.data_collector.configurator:
         class: 'PommProject\PommBundle\Configurator\DatabaseCollectorConfigurator'
         arguments: ['@?pomm.data_collector']
