@@ -35,11 +35,15 @@ class EntityParamConverter implements ParamConverterInterface
 
         $model = $options['session']->getModel($options['model']);
 
-        if ($options["optional"] === false) {
-            $entity = $model->findByPk($this->getPk($model, $request, $options));
-
-            $request->attributes->set($name, $entity);
+        try {
+            $entity = $model->findByPk($this->getPk($model, $request));
+        } catch (\LogicException $e) {
+            if ($options["optional"] === false) {
+                throw $e;
+            }
         }
+
+        $request->attributes->set($name, $entity);
 
         return true;
     }
@@ -62,14 +66,14 @@ class EntityParamConverter implements ParamConverterInterface
         return $options;
     }
 
-    private function getPk(Model $model, Request $request, array $options = [])
+    private function getPk(Model $model, Request $request)
     {
         $values = [];
         $primaryKeys = $model->getStructure()
             ->getPrimaryKey();
 
         foreach ($primaryKeys as $key) {
-            if (!$request->attributes->has($key) && $options["optional"] === false) {
+            if (!$request->attributes->has($key)) {
                 throw new \LogicException("Missing primary key element '$key'");
             }
             $values[$key] = $request->attributes->get($key);
