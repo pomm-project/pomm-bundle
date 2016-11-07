@@ -12,3 +12,8 @@ serialize:
     path: /serialize/{name}
     defaults: { _controller: index_controller:serializeAction }
     methods: [GET]
+
+property:
+    path: /property
+    defaults: { _controller: index_controller:propertyAction }
+    methods: [GET]
