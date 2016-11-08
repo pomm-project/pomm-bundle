@@ -129,3 +129,9 @@ public function getAction(Student $student)
 
 This feature require
 [sensio/framework-extra-bundle](http://symfony.com/doc/master/bundles/SensioFrameworkExtraBundle/index.html).
+
+## Property info
+
+This bundle also provide [property
+info](https://symfony.com/doc/current/components/property_info.html) support to
+retrieve flexible entity properties informations.
