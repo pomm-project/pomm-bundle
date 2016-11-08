@@ -40,7 +40,7 @@ class IndexController
         );
     }
 
-    public function getAction(Config $config)
+    public function getAction(Config $config = null)
     {
         return new Response(
             $this->templating->render(

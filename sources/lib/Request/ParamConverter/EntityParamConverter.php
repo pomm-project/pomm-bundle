@@ -35,7 +35,15 @@ class EntityParamConverter implements ParamConverterInterface
 
         $model = $options['session']->getModel($options['model']);
 
-        $entity = $model->findByPk($this->getPk($model, $request));
+        $entity = null;
+
+        try {
+            $entity = $model->findByPk($this->getPk($model, $request));
+        } catch (\LogicException $e) {
+            if ($options["optional"] === false) {
+                throw $e;
+            }
+        }
 
         $request->attributes->set($name, $entity);
 
@@ -54,6 +62,8 @@ class EntityParamConverter implements ParamConverterInterface
         else {
             $options['session'] = $this->pomm->getDefaultSession();
         }
+
+        $options["optional"] = $configuration->isOptional();
 
         return $options;
     }
