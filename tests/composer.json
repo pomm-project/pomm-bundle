@@ -18,29 +18,21 @@
         "behat/mink-selenium2-driver": "*"
     },
     "autoload": {
-        "psr-0": {
-            "": "src/",
-            "SymfonyStandard": "app/"
-        }
+        "psr-0": { "AppBundle\\": "src/" },
+        "classmap": [ "app/AppKernel.php" ]
     },
     "autoload-dev": {
         "files": ["tests/Features/bootstrap/FeatureContext.php"]
     },
     "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
+        "replace-pomm-bundle": [
+            "[ -L vendor/pomm-project/pomm-bundle ] || rm -rf vendor/pomm-project/pomm-bundle && ln -s ../../../ vendor/pomm-project/pomm-bundle"
         ],
         "post-install-cmd": [
-            "[ -L vendor/pomm-project/pomm-bundle ] || rm -rf vendor/pomm-project/pomm-bundle && ln -s ../../../ vendor/pomm-project/pomm-bundle",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "@replace-pomm-bundle"
         ],
         "post-update-cmd": [
-            "[ -L vendor/pomm-project/pomm-bundle ] || rm -rf vendor/pomm-project/pomm-bundle && ln -s ../../../ vendor/pomm-project/pomm-bundle",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "@replace-pomm-bundle"
         ]
     },
     "config": {
