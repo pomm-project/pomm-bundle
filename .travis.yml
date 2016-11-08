@@ -8,6 +8,11 @@ php:
     - "7.0"
     - "nightly"
 
+env:
+    matrix:
+        - COMPOSER_FLAGS=
+        - COMPOSER_FLAGS=--prefer-lowest
+
 matrix:
     allow_failures:
         - php: nightly
@@ -35,6 +40,6 @@ before_install:
     - php -S localhost:8080 -t web &> /dev/null &
     - ln -fs parameters.yml.dist app/config/parameters.yml
 
-install: composer install
+install: composer install $COMPOSER_FLAGS
 
 script: ./bin/behat
