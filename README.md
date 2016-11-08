@@ -130,6 +130,12 @@ public function getAction(Student $student)
 This feature require
 [sensio/framework-extra-bundle](http://symfony.com/doc/master/bundles/SensioFrameworkExtraBundle/index.html).
 
+## Serializer
+
+You can use the
+[serializer](https://symfony.com/doc/current/components/serializer.html)
+component to serialize entities.
+
 ## Property info
 
 This bundle also provide [property
