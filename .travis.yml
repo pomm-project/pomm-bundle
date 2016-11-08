@@ -8,6 +8,11 @@ php:
     - "7.0"
     - "nightly"
 
+env:
+    matrix:
+        - SYMFONY_VERSION=2
+        - SYMFONY_VERSION=3
+
 matrix:
     allow_failures:
         - php: nightly
@@ -35,6 +40,8 @@ before_install:
     - php -S localhost:8080 -t web &> /dev/null &
     - ln -fs parameters.yml.dist app/config/parameters.yml
 
-install: composer install
+install:
+  - composer install
+  - test "$SYMFONY_VERSION" -eq 3 || composer update --prefer-lowest
 
 script: ./bin/behat
