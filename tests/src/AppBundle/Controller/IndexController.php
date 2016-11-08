@@ -29,7 +29,7 @@ class IndexController
         );
     }
 
-    public function getAction(\AppBundle\Model\Config $config)
+    public function getAction(\AppBundle\Model\Config $config = null)
     {
         return new Response(
             $this->templating->render(

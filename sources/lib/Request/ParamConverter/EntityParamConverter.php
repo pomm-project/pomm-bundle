@@ -35,6 +35,8 @@ class EntityParamConverter implements ParamConverterInterface
 
         $model = $options['session']->getModel($options['model']);
 
+        $entity = null;
+
         try {
             $entity = $model->findByPk($this->getPk($model, $request));
         } catch (\LogicException $e) {
