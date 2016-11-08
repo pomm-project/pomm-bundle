@@ -16,7 +16,7 @@ class AppKernel extends Kernel
             new \AppBundle\AppBundle(),
         ];
 
-        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
+        if ($this->getEnvironment() === 'dev') {
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
         }
@@ -24,8 +24,23 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
+    public function getRootDir()
+    {
+        return __DIR__;
+    }
+
+    public function getCacheDir()
+    {
+        return __DIR__ . '/../var/cache/' . $this->getEnvironment();
+    }
+
+    public function getLogDir()
+    {
+        return __DIR__ . '/../var/logs/' . $this->getEnvironment();
+    }
+
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }
