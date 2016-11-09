@@ -23,17 +23,6 @@
     "autoload-dev": {
         "files": ["tests/Features/bootstrap/FeatureContext.php"]
     },
-    "scripts": {
-        "replace-pomm-bundle": [
-            "[ -L vendor/pomm-project/pomm-bundle ] || rm -rf vendor/pomm-project/pomm-bundle && ln -s ../../../ vendor/pomm-project/pomm-bundle"
-        ],
-        "post-install-cmd": [
-            "@replace-pomm-bundle"
-        ],
-        "post-update-cmd": [
-            "@replace-pomm-bundle"
-        ]
-    },
     "config": {
         "bin-dir": "bin"
     },

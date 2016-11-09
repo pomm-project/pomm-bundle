@@ -43,5 +43,7 @@ before_install:
 install:
   - composer install
   - test "$SYMFONY_VERSION" -eq 3 || composer update --prefer-lowest
+  - rm -rf vendor/pomm-project/pomm-bundle
+  - ln -s ../../../ vendor/pomm-project/pomm-bundle
 
 script: ./bin/behat
