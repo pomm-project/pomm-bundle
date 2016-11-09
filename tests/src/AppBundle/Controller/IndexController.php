@@ -70,7 +70,7 @@ class IndexController
 
     public function propertyAction()
     {
-        $info = $this->property->getTypes(Config::class, 'name');
+        $info = $this->property->getTypes('AppBundle\Model\Config', 'name');
 
         return new Response(
             $this->templating->render(
