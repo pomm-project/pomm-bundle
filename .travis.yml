@@ -32,11 +32,6 @@ before_install:
     - psql -c 'CREATE TABLE config (name character varying(25) PRIMARY KEY, value character varying(25))' -U postgres -h 127.0.0.1 pomm_test
     - psql -c "INSERT INTO config VALUES ('test', 'value')" -U postgres -h 127.0.0.1 pomm_test
 
-    - export DISPLAY=:99.0
-    - Xvfb $DISPLAY -extension RANDR &> /dev/null &
-    - wget -c http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar -O selenium.jar
-    - java -jar selenium.jar &> /dev/null &
-
     - php -S localhost:8080 -t web &> /dev/null &
     - ln -fs parameters.yml.dist app/config/parameters.yml
 

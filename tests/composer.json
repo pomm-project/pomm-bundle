@@ -13,8 +13,7 @@
     "require-dev": {
         "behatch/contexts": "~2.0",
         "behat/mink-extension": "~2.2",
-        "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*"
+        "behat/mink-goutte-driver": "*"
     },
     "autoload": {
         "psr-0": { "AppBundle\\": "src/" },
