@@ -3,10 +3,16 @@ language: php
 sudo: false
 
 php:
+    - "5.4"
     - "5.5"
     - "5.6"
     - "7.0"
     - "nightly"
+
+env:
+    matrix:
+        - SYMFONY_VERSION=2
+        - SYMFONY_VERSION=3
 
 matrix:
     allow_failures:
@@ -21,20 +27,19 @@ services: postgresql
 
 before_install:
     - cd tests
-    - composer self-update
+    - wget https://getcomposer.org/download/1.2.2/composer.phar -O composer
 
     - psql -c 'CREATE DATABASE pomm_test' -U postgres -h 127.0.0.1 postgres
     - psql -c 'CREATE TABLE config (name character varying(25) PRIMARY KEY, value character varying(25))' -U postgres -h 127.0.0.1 pomm_test
     - psql -c "INSERT INTO config VALUES ('test', 'value')" -U postgres -h 127.0.0.1 pomm_test
 
-    - export DISPLAY=:99.0
-    - Xvfb $DISPLAY -extension RANDR &> /dev/null &
-    - wget -c http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar -O selenium.jar
-    - java -jar selenium.jar &> /dev/null &
-
     - php -S localhost:8080 -t web &> /dev/null &
     - ln -fs parameters.yml.dist app/config/parameters.yml
 
-install: composer install
+install:
+  - php -n -d memory_limit=-1 composer install
+  - test "$SYMFONY_VERSION" -eq 3 || php -n -d memory_limit=-1 composer update --prefer-lowest
+  - rm -rf vendor/pomm-project/pomm-bundle
+  - ln -s ../../../ vendor/pomm-project/pomm-bundle
 
 script: ./bin/behat

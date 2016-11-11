@@ -18,30 +18,26 @@ class FeatureContext extends MinkContext
     }
 
     /**
+     * @When I am on the pomm profiler
+     */
+    public function iAmOnThePommProfiler()
+    {
+        $this->visitPath('/app_dev.php/_profiler/latest?panel=pomm');
+    }
+
+    /**
+     * @When I am on the timeline
+     */
+    public function iAmOnTheTimeline()
+    {
+        $this->visitPath('/app_dev.php/_profiler/latest?panel=time');
+    }
+
+    /**
      * @Then I should see the debug toolbar
      */
     public function debugToolbar()
     {
         $this->assertElementOnPage('.sf-toolbar');
-    }
-
-    /**
-     * @Then I should see the :name profiler toolbar
-     */
-    public function pommToolbar($name)
-    {
-        sleep(2);
-        $selector = sprintf('a[href$="?panel=%s"]', $name);
-        return $this->assertSession()
-            ->elementExists('css', $selector);
-    }
-
-    /**
-     * @When I click on the :name toolbar icon
-     */
-    public function clickPommToolbar($name)
-    {
-        $link = $this->pommToolbar($name);
-        $link->click();
     }
 }

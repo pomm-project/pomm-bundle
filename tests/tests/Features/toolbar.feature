@@ -4,19 +4,10 @@ Feature: Web debug toolbar
         When I am on homepage
         Then I should see the debug toolbar
 
-    @javascript
-    Scenario:
-        When I am on homepage
-        Then I should see the pomm profiler toolbar
-
-    @javascript
     Scenario: Query
-        When I am on homepage
-        And I click on the pomm toolbar icon
+        When I am on the pomm profiler
         Then I should see "Queries"
 
-    @javascript
     Scenario: Timeline
-        When I am on homepage
-        And I click on the time toolbar icon
+        When I am on the timeline
         Then I should see "pomm"

@@ -9,5 +9,4 @@ default:
         Behat\MinkExtension\ServiceContainer\MinkExtension:
             base_url: 'http://localhost:8080'
             goutte: ~
-            selenium2: ~
         Sanpi\Behatch\Extension: ~
