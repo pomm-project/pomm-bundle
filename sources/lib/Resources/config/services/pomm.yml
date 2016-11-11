@@ -12,6 +12,10 @@ services:
         arguments: ['@pomm']
         tags:
             - { name: request.param_converter, converter: pomm.entity }
+    pomm.serializer.normalizer:
+        class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityNormalizer'
+        tags:
+            - { name: serializer.normalizer }
     pomm.property_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\PommExtractor'
         arguments: ['@pomm']
