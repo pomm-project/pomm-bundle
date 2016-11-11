@@ -10,5 +10,5 @@ services:
         tags:
             - { name: data_collector, template: '@Pomm/Profiler/db.html.twig', id: 'pomm'}
     pomm.data_collector.configurator:
-        class: 'PommProject\PommBundle\Configurator\DatabaseCollectorConfigurator'
+        class: 'PommProject\SymfonyBridge\Configurator\DatabaseCollectorConfigurator'
         arguments: ['@?pomm.data_collector']
