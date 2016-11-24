@@ -8,7 +8,7 @@
         "pomm-project/foundation": "dev-master",
         "pomm-project/pomm-bundle": "dev-master",
         "pomm-project/model-manager": "dev-master",
-        "pomm-project/pomm-symfony-bridge": "dev-master"
+        "pomm-project/pomm-symfony-bridge": "~2.2@dev"
     },
     "require-dev": {
         "behatch/contexts": "~2.0",
