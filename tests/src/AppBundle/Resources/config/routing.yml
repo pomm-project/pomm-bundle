@@ -29,7 +29,7 @@ get_session_2:
     methods: [GET]
 
 serialize:
-    path: /serialize/{name}
+    path: /serialize
     defaults: { _controller: index_controller:serializeAction }
     methods: [GET]
 
