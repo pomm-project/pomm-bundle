@@ -13,6 +13,11 @@ services:
         tags:
             - { name: serializer.normalizer }
 
+    pomm.property_list_info:
+        class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\ListExtractor'
+        arguments: ['@pomm']
+        tags:
+            - { name: "property_info.list_extractor" }
     pomm.property_type_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\TypeExtractor'
         arguments: ['@pomm']
