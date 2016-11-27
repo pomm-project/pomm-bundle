@@ -33,9 +33,9 @@ serialize:
     defaults: { _controller: index_controller:serializeAction }
     methods: [GET]
 
-property:
-    path: /property
-    defaults: { _controller: index_controller:propertyAction }
+property_type:
+    path: /property/{property}
+    defaults: { _controller: index_controller:propertyTypeAction }
     methods: [GET]
 
 serviceModel:

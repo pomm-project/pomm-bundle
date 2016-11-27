@@ -12,11 +12,15 @@ services:
         class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityNormalizer'
         tags:
             - { name: serializer.normalizer }
-    pomm.property_info:
-        class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\PommExtractor'
+
+    pomm.property_type_info:
+        class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\TypeExtractor'
         arguments: ['@pomm']
         tags:
             - { name: "property_info.type_extractor" }
+    pomm.property_info:
+        alias: 'pomm.property_type_info'
+        deprecated: 'The "%service_id%" service is deprecated. Use "pomm.property_list_info" instead'
 
     pomm.session_builder:
         class: 'PommProject\Foundation\SessionBuilder'

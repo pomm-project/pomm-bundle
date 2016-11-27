@@ -120,9 +120,9 @@ class IndexController
         );
     }
 
-    public function propertyAction()
+    public function propertyTypeAction(string $property)
     {
-        $info = $this->property->getTypes('AppBundle\Model\Config', 'name');
+        $info = $this->property->getTypes('AppBundle\Model\Config', $property);
 
         return new Response(
             $this->templating->render(

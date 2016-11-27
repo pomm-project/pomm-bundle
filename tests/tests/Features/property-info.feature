@@ -1,5 +1,5 @@
 Feature: Entity Param Converter
 
-    Scenario:
-        When I am on "/app_dev.php/property"
+    Scenario: property type
+        When I am on "/app_dev.php/property/name"
         Then I should see "string"
