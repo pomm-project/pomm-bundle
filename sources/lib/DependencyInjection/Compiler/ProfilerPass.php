@@ -20,7 +20,7 @@ class ProfilerPass implements DI\Compiler\CompilerPassInterface
 
         $definition = new DI\Definition(
             "PommProject\\PommBundle\\Twig\\Extension\\ProfilerExtension",
-            [new DI\Reference('Twig.loader')]
+            [new DI\Reference('twig.loader.filesystem')]
         );
         //we run after the twig tags are collected so we need to manually do what twig compiler pass does
         $twig = $container->getDefinition('twig');

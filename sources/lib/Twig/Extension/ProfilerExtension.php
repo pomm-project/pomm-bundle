@@ -9,8 +9,6 @@
  */
 namespace PommProject\PommBundle\Twig\Extension;
 
-use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
-
 /**
  * ProfilerExtension
  *
@@ -30,9 +28,9 @@ class ProfilerExtension extends \Twig_Extension
      * Extension constructor.
      *
      * @access public
-     * @param  FilesystemLoader $loader
+     * @param  \Twig_Loader_Filesystem $loader
      */
-    public function __construct(FilesystemLoader $loader)
+    public function __construct(\Twig_Loader_Filesystem $loader)
     {
         $loader->addPath($this->getTemplateDirectory(), 'Pomm');
     }
