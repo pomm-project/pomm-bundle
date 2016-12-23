@@ -26,7 +26,6 @@ cache:
 services: postgresql
 
 before_install:
-    - cd tests
     - wget https://getcomposer.org/download/1.2.2/composer.phar -O composer
 
     - psql -c 'CREATE DATABASE pomm_test' -U postgres -h 127.0.0.1 postgres
@@ -36,13 +35,19 @@ before_install:
     - psql -c 'CREATE TABLE config (name character varying(25) PRIMARY KEY, value character varying(25))' -U postgres -h 127.0.0.1 pomm_test_2
     - psql -c "INSERT INTO config VALUES ('test', 'value_db2')" -U postgres -h 127.0.0.1 pomm_test_2
 
-    - php -S localhost:8080 -t web &> /dev/null &
-    - ln -fs parameters.yml.dist app/config/parameters.yml
+    - php -S localhost:8080 -t tests/web &> /dev/null &
+    - ln -fs parameters.yml.dist tests/app/config/parameters.yml
 
 install:
-  - php -n -d memory_limit=-1 composer install
-  - test "$SYMFONY_VERSION" -eq 3 || php -n -d memory_limit=-1 composer update --prefer-lowest
-  - rm -rf vendor/pomm-project/pomm-bundle
-  - ln -s ../../../ vendor/pomm-project/pomm-bundle
+    - php -n -d memory_limit=-1 composer install
+    - test "$SYMFONY_VERSION" -eq 3 || php -n -d memory_limit=-1 composer update --prefer-lowest
 
-script: ./bin/behat
+    - cd tests/
+    - php -n -d memory_limit=-1 composer install
+    - test "$SYMFONY_VERSION" -eq 3 || php -n -d memory_limit=-1 composer update --prefer-lowest
+    - rm -rf vendor/pomm-project/pomm-bundle
+    - ln -s ../../../ vendor/pomm-project/pomm-bundle
+
+script:
+    - ../vendor/bin/phpcs --standard=psr2 --runtime-set ignore_warnings_on_exit true --report=summary ../sources
+    - ./bin/behat
