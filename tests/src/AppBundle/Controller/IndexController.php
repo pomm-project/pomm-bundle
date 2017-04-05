@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use \AppBundle\Model\Config;
 use \PommProject\Foundation\Session\Session;
+use \Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use \Symfony\Component\Serializer\Serializer;
 use \Symfony\Component\HttpFoundation\Response;
 use \Symfony\Component\Templating\EngineInterface;
@@ -41,6 +42,51 @@ class IndexController
     }
 
     public function getAction(Config $config = null)
+    {
+        return new Response(
+            $this->templating->render(
+                'AppBundle:Front:get.html.twig',
+                compact('config')
+            )
+        );
+    }
+
+    /**
+     * Get data with default session
+     *
+     * @ParamConverter("config", options={"model": "\AppBundle\Model\ConfigModel"})
+     */
+    public function getDefaultSessionAction(Config $config)
+    {
+        return new Response(
+            $this->templating->render(
+                'AppBundle:Front:get.html.twig',
+                compact('config')
+            )
+        );
+    }
+
+    /**
+     * Get data with session 1
+     *
+     * @ParamConverter("config", options={"session": "my_db", "model": "\AppBundle\Model\ConfigModel"})
+     */
+    public function getSessionAction(Config $config)
+    {
+        return new Response(
+            $this->templating->render(
+                'AppBundle:Front:get.html.twig',
+                compact('config')
+            )
+        );
+    }
+
+    /**
+     * Get data with session 2
+     *
+     * @ParamConverter("config", options={"session": "my_db2", "model": "\AppBundle\Model\ConfigModel"})
+     */
+    public function getSession2Action(Config $config)
     {
         return new Response(
             $this->templating->render(

@@ -32,6 +32,9 @@ before_install:
     - psql -c 'CREATE DATABASE pomm_test' -U postgres -h 127.0.0.1 postgres
     - psql -c 'CREATE TABLE config (name character varying(25) PRIMARY KEY, value character varying(25))' -U postgres -h 127.0.0.1 pomm_test
     - psql -c "INSERT INTO config VALUES ('test', 'value')" -U postgres -h 127.0.0.1 pomm_test
+    - psql -c 'CREATE DATABASE pomm_test_2' -U postgres -h 127.0.0.1 postgres
+    - psql -c 'CREATE TABLE config (name character varying(25) PRIMARY KEY, value character varying(25))' -U postgres -h 127.0.0.1 pomm_test_2
+    - psql -c "INSERT INTO config VALUES ('test', 'value_db2')" -U postgres -h 127.0.0.1 pomm_test_2
 
     - php -S localhost:8080 -t web &> /dev/null &
     - ln -fs parameters.yml.dist app/config/parameters.yml
