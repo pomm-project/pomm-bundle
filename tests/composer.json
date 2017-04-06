@@ -4,10 +4,10 @@
         "symfony/monolog-bundle": "~3.0",
         "twig/extensions": "~1.0",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
-        "pomm-project/cli": "dev-master",
-        "pomm-project/foundation": "dev-master",
+        "pomm-project/cli": "~2.0",
+        "pomm-project/foundation": "~2.0",
+        "pomm-project/model-manager": "~2.0",
         "pomm-project/pomm-bundle": "dev-master",
-        "pomm-project/model-manager": "dev-master",
         "pomm-project/pomm-symfony-bridge": "~2.2.1@dev"
     },
     "require-dev": {
