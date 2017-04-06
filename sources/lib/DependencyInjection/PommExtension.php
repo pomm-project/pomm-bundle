@@ -11,6 +11,8 @@ namespace PommProject\PommBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -60,11 +62,39 @@ class PommExtension extends Extension
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $container->setParameter('pomm.configuration', $config['configuration']);
+        $definition = $container->getDefinition('pomm');
+        foreach ($config['configuration'] as $name => $pommConfig) {
+            if (isset($pommConfig['session_builder'])) {
+                $service = $container->getDefinition($pommConfig['session_builder']);
+                $service->setArguments([$pommConfig]);
+
+                $definition->addMethodCall('addBuilder', [$name, new Reference($pommConfig['session_builder'])]);
+            } else {
+                $service = uniqid($pommConfig['class:session_builder'], true);
+                $cbDefinition = $container->register($service, ltrim($pommConfig['class:session_builder'], '\\'));
+                $cbDefinition->setShared(false);
+                $cbDefinition->setArguments([$pommConfig]);
+
+                $definition->addMethodCall('addBuilder', [$name, new Reference($service)]);
+            }
+
+            if (isset($pommConfig['pomm:default']) && $pommConfig['pomm:default']) {
+                $definition->addMethodCall('setDefaultBuilder', [$name]);
+
+                $container->setAlias('pomm.default_session', sprintf('pomm.session.%s', $name));
+            }
+
+            //register all session's into the container
+            $session = new Definition('PommProject\Foundation\Session\Session');
+            $session->setFactory([new Reference('pomm'), 'getSession'])
+                ->addArgument($name)
+                ;
+            $container->addDefinitions([sprintf('pomm.session.%s', $name) => $session]);
+        }
 
         $logger = $this->getLogger($config);
         if ($logger !== null) {
-            $container->getDefinition('pomm')
+            $definition
                 ->addMethodCall('setLogger', [$this->getLogger($config)]);
         }
 

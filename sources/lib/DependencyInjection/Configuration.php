@@ -42,8 +42,33 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('dsn')->isRequired()->end()
-                            ->scalarNode('class:session_builder')->defaultValue('\PommProject\ModelManager\SessionBuilder')->end()
+                            ->scalarNode('class:session_builder')
+                                ->defaultNull()
+                                ->beforeNormalization()
+                                    ->always()
+                                    ->then(function ($v) {
+                                        @trigger_error('class:session_builder is deprecated since version 2.3 and will be removed in 3.0. Use session_builder config key instead with a service id.', E_USER_DEPRECATED);
+                                        return $v;
+                                    })
+                                ->end()
+                            ->end()
+                            ->scalarNode('session_builder')->defaultNull()->end()
                             ->scalarNode('pomm:default')->end()
+                        ->end()
+                        ->validate()
+                            ->ifTrue(function ($v) {
+                                return isset($v['session_builder']) && isset($v['class:session_builder']);
+                            })
+                            ->thenInvalid('You cannot use both "session_builder" and "class:session_builder" at the same time.')
+                        ->end()
+                        ->beforeNormalization()
+                            ->always()
+                            ->then(function ($v) {
+                                if (!isset($v['session_builder']) && !isset($v['class:session_builder'])) {
+                                    $v['session_builder'] = 'pomm.session_builder';
+                                }
+                                return $v;
+                            })
                         ->end()
                     ->end()
                 ->end()
