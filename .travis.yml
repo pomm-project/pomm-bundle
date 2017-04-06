@@ -26,8 +26,6 @@ cache:
 services: postgresql
 
 before_install:
-    - wget https://getcomposer.org/download/1.2.2/composer.phar -O composer
-
     - psql -c 'CREATE DATABASE pomm_test' -U postgres -h 127.0.0.1 postgres
     - psql -c 'CREATE TABLE config (name character varying(25) PRIMARY KEY, value character varying(25))' -U postgres -h 127.0.0.1 pomm_test
     - psql -c "INSERT INTO config VALUES ('test', 'value')" -U postgres -h 127.0.0.1 pomm_test
@@ -39,12 +37,12 @@ before_install:
     - ln -fs parameters.yml.dist tests/app/config/parameters.yml
 
 install:
-    - php -n -d memory_limit=-1 composer install
-    - test "$SYMFONY_VERSION" -eq 3 || php -n -d memory_limit=-1 composer update --prefer-lowest
+    - composer install
+    - test "$SYMFONY_VERSION" -eq 3 || composer update --prefer-lowest
 
     - cd tests/
-    - php -n -d memory_limit=-1 composer install
-    - test "$SYMFONY_VERSION" -eq 3 || php -n -d memory_limit=-1 composer update --prefer-lowest
+    - composer install
+    - test "$SYMFONY_VERSION" -eq 3 || composer update --prefer-lowest
     - rm -rf vendor/pomm-project/pomm-bundle
     - ln -s ../../../ vendor/pomm-project/pomm-bundle
 
