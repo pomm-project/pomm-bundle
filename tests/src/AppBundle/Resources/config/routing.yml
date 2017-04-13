@@ -13,6 +13,21 @@ get:
     defaults: { _controller: index_controller:getAction }
     methods: [GET]
 
+get_session_default:
+    path: /get_session_default/{name}
+    defaults: { _controller: index_controller:getSession2Action }
+    methods: [GET]
+
+get_session:
+    path: /get_session_1/{name}
+    defaults: { _controller: index_controller:getSession2Action }
+    methods: [GET]
+
+get_session_2:
+    path: /get_session_2/{name}
+    defaults: { _controller: index_controller:getSession2Action }
+    methods: [GET]
+
 serialize:
     path: /serialize/{name}
     defaults: { _controller: index_controller:serializeAction }

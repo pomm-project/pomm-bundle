@@ -56,7 +56,7 @@ class EntityParamConverter implements ParamConverterInterface
             'model' => $configuration->getClass() . 'Model',
         ], $configuration->getOptions());
 
-        if (isset($options['connection'])) {
+        if (isset($options['session'])) {
             $options['session'] = $this->pomm[$options['session']];
         }
         else {

@@ -38,7 +38,8 @@ pomm:
             dsn: "pgsql://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%"
             class:session_builder: '\PommProject\ModelManager\SessionBuilder'
             pomm:default: true
-        #my_db2:
-        #    dsn: 'pgsql://user:pass@host:port/db_name2'
+        my_db2:
+            dsn: "pgsql://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%_2"
+            class:session_builder: '\PommProject\ModelManager\SessionBuilder'
     logger:
         service: '@logger'
