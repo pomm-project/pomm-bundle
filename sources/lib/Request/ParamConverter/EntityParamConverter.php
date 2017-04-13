@@ -25,7 +25,9 @@ class EntityParamConverter implements ParamConverterInterface
 
         $reflection = new \ReflectionClass($configuration->getClass());
 
-        return $reflection->implementsInterface("PommProject\\ModelManager\\Model\\FlexibleEntity\\FlexibleEntityInterface");
+        return $reflection->implementsInterface(
+            "PommProject\\ModelManager\\Model\\FlexibleEntity\\FlexibleEntityInterface"
+        );
     }
 
     public function apply(Request $request, ParamConverter $configuration)
@@ -58,8 +60,7 @@ class EntityParamConverter implements ParamConverterInterface
 
         if (isset($options['session'])) {
             $options['session'] = $this->pomm[$options['session']];
-        }
-        else {
+        } else {
             $options['session'] = $this->pomm->getDefaultSession();
         }
 

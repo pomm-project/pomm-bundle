@@ -24,7 +24,8 @@
     "symfony/framework-bundle": "~2.8|~3.0"
   },
   "require-dev": {
-    "symfony/console": "~2.6|~3.0"
+    "symfony/console": "~2.6|~3.0",
+    "squizlabs/php_codesniffer": "~2.7"
   },
   "suggest": {
       "symfony/web-profiler-bundle": "Display queries log",
