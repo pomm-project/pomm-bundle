@@ -36,6 +36,8 @@ class PommBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new DependencyInjection\Compiler\ProfilerPass);
+        $container->addCompilerPass(new DependencyInjection\Compiler\PoolerPass);
+        $container->addCompilerPass(new DependencyInjection\Compiler\ModelPass);
     }
 
     /**

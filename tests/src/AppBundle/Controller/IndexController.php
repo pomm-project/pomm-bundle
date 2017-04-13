@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use \AppBundle\Model\Config;
+use AppBundle\Model\ServiceModel;
 use \PommProject\Foundation\Session\Session;
 use \Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use \Symfony\Component\Serializer\Serializer;
@@ -16,17 +17,22 @@ class IndexController
     private $templating;
     private $serializer;
     private $property;
+    private $serviceModel;
 
     public function __construct(
         EngineInterface $templating,
         Session $pomm,
         Serializer $serializer,
-        PropertyInfoExtractor $property
+        PropertyInfoExtractor $property,
+        Session $serviceSession,
+        ServiceModel $serviceModel
     ) {
         $this->pomm = $pomm;
         $this->templating = $templating;
         $this->serializer = $serializer;
         $this->property = $property;
+        $this->serviceSession = $serviceSession;
+        $this->serviceModel = $serviceModel;
     }
 
     public function indexAction()
@@ -124,5 +130,17 @@ class IndexController
                 compact('info')
             )
         );
+    }
+
+    public function serviceModelAction()
+    {
+        $model = $this->serviceSession->getModel('AppBundle\Model\ServiceModel');
+
+        return new Response('Created model as service. Sum:' . $model->getSum());
+    }
+
+    public function serviceContainerAction()
+    {
+        return new Response('Model from container as service. Sum:' . $this->serviceModel->getSum());
     }
 }
