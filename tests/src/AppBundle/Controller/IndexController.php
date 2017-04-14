@@ -120,6 +120,23 @@ class IndexController
         );
     }
 
+    public function deserializeAction()
+    {
+        $json = <<<EOF
+{
+    "name": "test",
+    "value": "ok"
+}
+EOF;
+
+        $config = $this->serializer->deserialize($json, Config::class, 'json');
+
+        return new Response(
+            var_export($config),
+            Response::HTTP_OK
+        );
+    }
+
     public function propertyListAction()
     {
         $info = $this->property->getProperties('AppBundle\Model\Config');

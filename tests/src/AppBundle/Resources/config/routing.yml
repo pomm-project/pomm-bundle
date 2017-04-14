@@ -33,6 +33,11 @@ serialize:
     defaults: { _controller: index_controller:serializeAction }
     methods: [GET]
 
+deserialize:
+    path: /deserialize
+    defaults: { _controller: index_controller:deserializeAction }
+    methods: [GET]
+
 property_list:
     path: /property
     defaults: { _controller: index_controller:propertyListAction }
