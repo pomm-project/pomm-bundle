@@ -29,13 +29,18 @@ get_session_2:
     methods: [GET]
 
 serialize:
-    path: /serialize/{name}
+    path: /serialize
     defaults: { _controller: index_controller:serializeAction }
     methods: [GET]
 
-property:
+property_list:
     path: /property
-    defaults: { _controller: index_controller:propertyAction }
+    defaults: { _controller: index_controller:propertyListAction }
+    methods: [GET]
+
+property_type:
+    path: /property/{property}
+    defaults: { _controller: index_controller:propertyTypeAction }
     methods: [GET]
 
 serviceModel:

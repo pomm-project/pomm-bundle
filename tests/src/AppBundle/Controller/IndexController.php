@@ -120,9 +120,21 @@ class IndexController
         );
     }
 
-    public function propertyAction()
+    public function propertyListAction()
     {
-        $info = $this->property->getTypes('AppBundle\Model\Config', 'name');
+        $info = $this->property->getProperties('AppBundle\Model\Config');
+
+        return new Response(
+            $this->templating->render(
+                'AppBundle:Front:properties.html.twig',
+                compact('info')
+            )
+        );
+    }
+
+    public function propertyTypeAction(string $property)
+    {
+        $info = $this->property->getTypes('AppBundle\Model\Config', $property);
 
         return new Response(
             $this->templating->render(

@@ -1,0 +1,9 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}
+Pomm bundle test app
+{% endblock %}
+
+{% block body %}
+    {{ info | join('/') }}
+{% endblock %}
