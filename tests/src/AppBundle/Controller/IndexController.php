@@ -129,7 +129,7 @@ class IndexController
 }
 EOF;
 
-        $config = $this->serializer->deserialize($json, Config::class, 'json');
+        $config = $this->serializer->deserialize($json, '\AppBundle\Model\Config', 'json');
 
         return new Response(
             var_export($config),
