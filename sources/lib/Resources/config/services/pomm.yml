@@ -23,9 +23,12 @@ services:
         arguments: ['@pomm']
         tags:
             - { name: "property_info.type_extractor" }
+    # @deprecated
     pomm.property_info:
-        alias: 'pomm.property_type_info'
-        deprecated: 'The "%service_id%" service is deprecated. Use "pomm.property_list_info" instead'
+        class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\PommExtractor'
+        arguments: ['@pomm']
+        tags:
+            - { name: "property_info.type_extractor" }
 
     pomm.session_builder:
         class: 'PommProject\Foundation\SessionBuilder'
