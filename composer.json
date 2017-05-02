@@ -1,6 +1,6 @@
 {
   "name": "pomm-project/pomm-bundle",
-  "type": "library",
+  "type": "symfony-bundle",
   "description": "The Symfony2 bundle for Pomm2",
   "keywords": ["orm", "postgresql", "database", "symfony", "pomm"],
   "homepage": "http://www.pomm-project.org",
