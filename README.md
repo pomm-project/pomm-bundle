@@ -81,6 +81,16 @@ The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `ap
 $ ./app/console pomm:generate:relation-all -d src -a 'AppBundle\Model' my_db1 student
 ```
 
+If you want generate schema, you need to use the model manager session builder:
+
+```yml
+pomm:
+    configuration:
+        my_db1:
+            dsn: "pgsql://%db_user1%:%db_password1%@%db_host1%:%db_port1%/%db_name1%"
+            session_builder: "pomm.model_manager.session_builder"
+```
+
 ## Using Pomm from the controller
 
 The Pomm service is available in the DIC as any other service:

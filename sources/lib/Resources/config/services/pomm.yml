@@ -32,7 +32,8 @@ services:
 
     pomm.session_builder:
         class: 'PommProject\Foundation\SessionBuilder'
-        arguments:
+    pomm.model_manager.session_builder:
+        class: 'PommProject\ModelManager\SessionBuilder'
 
     pomm.session_builder.configurator:
         class: 'PommProject\PommBundle\Model\Configurator'
