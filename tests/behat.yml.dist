@@ -4,9 +4,9 @@ default:
             paths: [ %paths.base%/tests/Features ]
             contexts:
                 - FeatureContext
-                - behatch:json
+                - behatch:context:json
     extensions:
         Behat\MinkExtension\ServiceContainer\MinkExtension:
             base_url: 'http://localhost:8080'
             goutte: ~
-        Sanpi\Behatch\Extension: ~
+        Behatch\Extension: ~

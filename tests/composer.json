@@ -11,7 +11,7 @@
         "pomm-project/pomm-symfony-bridge": "~2.3@dev"
     },
     "require-dev": {
-        "behatch/contexts": "~2.0",
+        "behatch/contexts": "~2.7|~3.0",
         "behat/mink-extension": "~2.2",
         "behat/mink-goutte-driver": "*"
     },
