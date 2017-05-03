@@ -75,10 +75,10 @@ _pomm:
 
 ## Command line interface
 
-The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `app/console` utility. It is possible to browse the database or to generate model files.
+The [Pomm CLI](https://github.com/pomm-project/Cli) is available through the `bin/console` utility. It is possible to browse the database or to generate model files.
 
 ```
-$ ./app/console pomm:generate:relation-all -d src -a 'AppBundle\Model' my_db1 student
+$ ./bin/console pomm:generate:relation-all -d src -a 'AppBundle\Model' my_db1 student
 ```
 
 If you want generate schema, you need to use the model manager session builder:
