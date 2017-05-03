@@ -56,13 +56,13 @@ Add an entry in `config.yml`:
 pomm:
     configuration:
         my_db1:
-            dsn: 'pgsql://%db_user1%:%db_password1%@%db_host1%:%db_port1%/%db_name1%'
+            dsn: "pgsql://%db_user1%:%db_password1%@%db_host1%:%db_port1%/%db_name1%"
             pomm:default: true
         my_db2:
-            dsn: 'pgsql://%db_user2%:%db_password2%@%db_host2%:%db_port2%/%db_name2%'
-            session_builder: 'pomm.session_builder'
+            dsn: "pgsql://%db_user2%:%db_password2%@%db_host2%:%db_port2%/%db_name2%"
+            session_builder: "pomm.session_builder"
     logger:
-        service: '@logger'
+        service: "@logger"
 ```
 
 And in `routing_dev.yml`:
