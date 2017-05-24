@@ -29,7 +29,7 @@ class ContainerModelLayerPooler extends ModelLayerPooler implements ContainerAwa
 {
     use ContainerAwareTrait;
 
-    private $serviceMap;
+    private $serviceMap = [];
 
     /**
      * {@inheritdoc}
