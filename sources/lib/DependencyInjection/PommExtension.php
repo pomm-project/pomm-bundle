@@ -10,9 +10,6 @@
 namespace PommProject\PommBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -43,7 +40,10 @@ class PommExtension extends Extension
 
         $loader->load('services/profiler.yml');
 
-        $config = $this->configure($configs, $container);
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $this->configure($config, $container);
     }
 
     /**
@@ -52,75 +52,23 @@ class PommExtension extends Extension
      * Configure the DIC using configuration file.
      *
      * @access public
-     * @param  array            $configs
+     * @param  array            $config
      * @param  ContainerBuilder $container
      * @return null
      */
-    public function configure(array $configs, ContainerBuilder $container)
+    public function configure(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
-        $config = $processor->processConfiguration($configuration, $configs);
-
         $definition = $container->getDefinition('pomm');
-        foreach ($config['configuration'] as $name => $pommConfig) {
-            if (isset($pommConfig['session_builder'])) {
-                $service = $container->getDefinition($pommConfig['session_builder']);
-                $service->setArguments([$pommConfig]);
 
-                $definition->addMethodCall('addBuilder', [$name, new Reference($pommConfig['session_builder'])]);
-            } else {
-                $service = uniqid($pommConfig['class:session_builder'], true);
-                $cbDefinition = $container->register($service, ltrim($pommConfig['class:session_builder'], '\\'));
-                $cbDefinition->setShared(false);
-                $cbDefinition->setArguments([$pommConfig]);
-
-                $definition->addMethodCall('addBuilder', [$name, new Reference($service)]);
-            }
-
-            if (isset($pommConfig['pomm:default']) && $pommConfig['pomm:default']) {
-                $definition->addMethodCall('setDefaultBuilder', [$name]);
-
-                $container->setAlias('pomm.default_session', sprintf('pomm.session.%s', $name));
-            }
-
-            //register all session's into the container
-            $session = new Definition('PommProject\Foundation\Session\Session');
-            $session->setFactory([new Reference('pomm'), 'getSession'])
-                ->addArgument($name)
-                ;
-            $container->addDefinitions([sprintf('pomm.session.%s', $name) => $session]);
-        }
-
-        $logger = $this->getLogger($config);
-        if ($logger !== null) {
-            $definition
-                ->addMethodCall('setLogger', [$this->getLogger($config)]);
-        }
-
-        return $config;
-    }
-
-    /**
-     * getLogger
-     *
-     * Return a logger reference is any.
-     *
-     * @access private
-     * @param  array    $config
-     * @return Reference|null
-     */
-    private function getLogger(array $config)
-    {
-        $logger = null;
+        $container->setParameter('pomm.configuration', $config['configuration']);
 
         if (isset($config['logger']['service'])) {
             $service = $config['logger']['service'];
 
             if (is_string($service) && strpos($service, '@') === 0) {
-                $logger = new Reference(substr($service, 1));
+                $definition
+                    ->addMethodCall('setLogger', [new Reference(substr($service, 1))]);
             }
         }
-        return $logger;
     }
 }
