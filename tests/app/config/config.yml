@@ -43,5 +43,7 @@ pomm:
         service_db:
             dsn: "pgsql://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%"
             session_builder: "pomm.session_builder"
+        default_session_builder:
+            dsn: "pgsql://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%"
     logger:
         service: "@logger"
