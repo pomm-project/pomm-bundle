@@ -1,6 +1,6 @@
 # Pomm2 bundle for Symfony
 
-[![Build Status](https://travis-ci.org/pomm-project/pomm-bundle.svg)](https://travis-ci.org/pomm-project/pomm-bundle)
+[![Build Status](https://travis-ci.org/pomm-project/pomm-bundle.svg)](https://travis-ci.org/pomm-project/pomm-bundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pomm-project/pomm-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pomm-project/pomm-bundle/?branch=master)
 
 Although this bundle usable already, it is a work in progress. New features will be added.
 
