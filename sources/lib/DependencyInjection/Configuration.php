@@ -65,7 +65,7 @@ class Configuration implements ConfigurationInterface
                             ->always()
                             ->then(function ($v) {
                                 if (!isset($v['session_builder']) && !isset($v['class:session_builder'])) {
-                                    $v['session_builder'] = 'pomm.session_builder';
+                                    $v['session_builder'] = 'pomm.model_manager.session_builder';
                                 }
                                 return $v;
                             })
