@@ -12,12 +12,12 @@ services:
     pomm.serializer.normalizer:
         class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityNormalizer'
         tags:
-            - { name: serializer.normalizer, priority: 1 }
+            - { name: serializer.normalizer, priority: 10 }
     pomm.serializer.denormalizer:
         class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityDenormalizer'
         arguments: ['@pomm']
         tags:
-            - { name: serializer.normalizer, priority: 1 }
+            - { name: serializer.normalizer, priority: 10 }
 
     pomm.property_list_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\ListExtractor'
