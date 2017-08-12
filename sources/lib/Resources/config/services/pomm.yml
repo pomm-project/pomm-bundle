@@ -8,10 +8,16 @@ services:
         arguments: ['@pomm']
         tags:
             - { name: request.param_converter, converter: pomm.entity }
+
     pomm.serializer.normalizer:
         class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityNormalizer'
         tags:
-            - { name: serializer.normalizer }
+            - { name: serializer.normalizer, priority: 1 }
+    pomm.serializer.denormalizer:
+        class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityDenormalizer'
+        arguments: ['@pomm']
+        tags:
+            - { name: serializer.normalizer, priority: 1 }
 
     pomm.property_list_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\ListExtractor'
