@@ -57,3 +57,8 @@ serviceContainer:
     path: /serviceContainer
     defaults: { _controller: index_controller:serviceContainerAction }
     methods: [GET]
+
+get_autowire:
+    path: /get_autowire/{name}
+    defaults: { _controller: autowire_controller:getAutowireAction }
+    methods: [GET]
