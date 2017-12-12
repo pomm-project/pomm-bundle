@@ -7,3 +7,6 @@ services:
         arguments: ['@logger']
         tags:
             - { name: pomm.model, session: pomm.session.service_db }
+    autowire_controller:
+        class: AppBundle\Controller\AutowireController
+        tags: ['controller.service_arguments']
