@@ -1,14 +1,14 @@
 {
     "require": {
-        "symfony/symfony": "~2.8|~3.0",
+        "symfony/symfony": "~2.8|~3.0|~4.0",
         "symfony/monolog-bundle": "~3.0",
         "twig/extensions": "~1.0",
-        "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+        "sensio/framework-extra-bundle": "~3.0,>=3.0.2|~4.0",
         "pomm-project/cli": "~2.0",
         "pomm-project/foundation": "~2.0",
         "pomm-project/model-manager": "~2.0",
         "pomm-project/pomm-bundle": "dev-master",
-        "pomm-project/pomm-symfony-bridge": "~2.4"
+        "pomm-project/pomm-symfony-bridge": "~2.5"
     },
     "require-dev": {
         "behatch/contexts": "~2.7|~3.0",

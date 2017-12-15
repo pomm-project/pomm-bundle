@@ -10,6 +10,7 @@
 namespace PommProject\PommBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -60,6 +61,7 @@ class PommExtension extends Extension
     {
         $definition = $container->getDefinition('pomm');
 
+        $container->setAlias('PommProject\Foundation\Pomm', new Alias('pomm', false));
         $container->setParameter('pomm.configuration', $config['configuration']);
 
         if (isset($config['logger']['service'])) {

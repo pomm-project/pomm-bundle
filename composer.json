@@ -20,7 +20,7 @@
     "jdorn/sql-formatter": "~1.2",
     "pomm-project/model-manager": "~2.0",
     "pomm-project/cli": "~2.0",
-    "pomm-project/pomm-symfony-bridge": "~2.4",
+    "pomm-project/pomm-symfony-bridge": "~2.5",
     "symfony/framework-bundle": "~2.8|~3.0|~4.0"
   },
   "require-dev": {

@@ -1,7 +1,7 @@
 default:
     suites:
         default:
-            paths: [ %paths.base%/tests/Features ]
+            paths: [ "%paths.base%/tests/Features" ]
             contexts:
                 - FeatureContext
                 - behatch:context:json

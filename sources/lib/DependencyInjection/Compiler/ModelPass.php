@@ -64,8 +64,13 @@ class ModelPass implements DI\Compiler\CompilerPassInterface
             $container->register($id, $old->getClass())
                 ->setFactory([new DI\Reference($sessionId), $method])
                 ->addArgument($old->getClass())
-                ->setAutowiringTypes([$old->getClass()]) //set this one as a default for autowire
             ;
+
+            if (version_compare(\Symfony\Component\HttpKernel\Kernel::VERSION, '3.3', '>=')) {
+                $container->setAlias($class,  $id);
+            } else {
+                $container->addAutowiringType($old->getClass());
+            }
         }
     }
 }
