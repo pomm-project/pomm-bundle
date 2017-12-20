@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Model;
+namespace AppBundle\Model\MyDb1\PublicSchema;
 
 use PommProject\ModelManager\Model\FlexibleEntity;
 

@@ -6,4 +6,5 @@
 /composer.phar
 /composer.lock
 /behat.yml
-/var/
+/var
+/src/AppBundle/Model/

@@ -5,14 +5,14 @@
  * generation.
  */
 
-namespace AppBundle\Model\AutoStructure;
+namespace AppBundle\Model\MyDb1\PublicSchema\AutoStructure;
 
 use PommProject\ModelManager\Model\RowStructure;
 
 /**
- * Config
+ * Service
  *
- * Structure class for relation public.config.
+ * Structure class for relation public.service.
  *
  * Class and fields comments are inspected from table and fields comments.
  * Just add comments in your database and they will appear here.
@@ -22,23 +22,16 @@ use PommProject\ModelManager\Model\RowStructure;
  *
  * @see RowStructure
  */
-class Config extends RowStructure
+class Service extends RowStructure
 {
     /**
-     * __construct
      *
      * Structure definition.
-     *
-     * @access public
-     * @return null
      */
     public function __construct()
     {
         $this
-            ->setRelation('public.config')
-            ->setPrimaryKey(['name'])
-            ->addField('name', 'varchar')
-            ->addField('value', 'varchar')
+            ->setRelation('public.service')
             ;
     }
 }
