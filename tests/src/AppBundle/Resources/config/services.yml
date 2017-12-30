@@ -10,4 +10,5 @@ services:
             - { name: pomm.model, session: pomm.session.service_db }
     autowire_controller:
         class: AppBundle\Controller\AutowireController
-        tags: ['controller.service_arguments']
+        tags:
+            - { name: controller.service_arguments }

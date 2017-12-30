@@ -1,3 +1,4 @@
+@upper2lts
 Feature: Autowire
 
   Scenario:
