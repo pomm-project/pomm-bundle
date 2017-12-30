@@ -70,8 +70,7 @@ class ModelPass implements DI\Compiler\CompilerPassInterface
                 $container->addAutowiringType($old->getClass());
             }
 
-            $container->setAlias($class,  $id);
-
+            $container->setAlias($class, $id);
         }
     }
 }
