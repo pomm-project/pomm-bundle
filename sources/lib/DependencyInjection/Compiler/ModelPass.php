@@ -67,7 +67,7 @@ class ModelPass implements DI\Compiler\CompilerPassInterface
             ;
 
             if (version_compare(\Symfony\Component\HttpKernel\Kernel::VERSION, '3.3', '<')) {
-                $container->addAutowiringType($old->getClass());
+                $service->addAutowiringType($old->getClass());
             }
 
             $container->setAlias($class, $id);
