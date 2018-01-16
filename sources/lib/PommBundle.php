@@ -35,10 +35,19 @@ class PommBundle extends Bundle
     {
         parent::build($container);
 
+        $this->checkPhpVersion();
+
         $container->addCompilerPass(new DependencyInjection\Compiler\ProfilerPass);
         $container->addCompilerPass(new DependencyInjection\Compiler\PoolerPass);
         $container->addCompilerPass(new DependencyInjection\Compiler\ModelPass);
         $container->addCompilerPass(new DependencyInjection\Compiler\BuilderPass);
+    }
+
+    private function checkPhpVersion()
+    {
+        if (PHP_MAJOR_VERSION === 5) {
+            @trigger_error('The pomm bundle stop supporting PHP5 in version 3.0', E_USER_DEPRECATED);
+        }
     }
 
     /**
