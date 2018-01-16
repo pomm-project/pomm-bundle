@@ -54,8 +54,17 @@ install:
     - rm -rf vendor/pomm-project/pomm-bundle
     - ln -s ../../../ vendor/pomm-project/pomm-bundle
 
+before_script:
+    - |
+      export CURRENT_SYMFONY_VERSION=$(                                       \
+          composer show --format=json                                         \
+          | jq '.installed[] | select(.name == "symfony/symfony") | .version' \
+          | sed 's/^"v\([0-9]\+\)\.[^"]*"/\1/'                                \
+      )
+    - echo $CURRENT_SYMFONY_VERSION
+
 script:
     - ../vendor/bin/phpcs --standard=psr2 --runtime-set ignore_warnings_on_exit true --report=summary ../sources
     - ./app/console pomm:generate:schema-all -d 'src/'  -a 'AppBundle\Model' my_db1
-    - ./bin/behat --tags "~@upper${SYMFONY_VERSION}lts"
+    - ./bin/behat --tags "~@upper${CURRENT_SYMFONY_VERSION}lts"
     - ./app/console pomm:generate:schema-all default_session_builder
