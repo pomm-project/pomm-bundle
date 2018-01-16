@@ -38,11 +38,9 @@ before_install:
 
     - php -S localhost:8080 -t tests/web &> /dev/null &
     - ln -fs parameters.yml.dist tests/app/config/parameters.yml
-    - test "$SYMFONY_VERSION" -eq 2 && composer require --no-update symfony/lts:^2||true
-    - test "$SYMFONY_VERSION" -eq 3 && composer require --no-update symfony/lts:^3||true
+    - test "$SYMFONY_VERSION" -eq 4 || composer require --no-update "symfony/lts:^$SYMFONY_VERSION"
     - cd tests/
-    - test "$SYMFONY_VERSION" -eq 2 && composer require --no-update symfony/lts:^2||true
-    - test "$SYMFONY_VERSION" -eq 3 && composer require --no-update symfony/lts:^3||true
+    - test "$SYMFONY_VERSION" -eq 4 || composer require --no-update "symfony/lts:^$SYMFONY_VERSION"
     - cd ..
 
 install:
@@ -59,5 +57,5 @@ install:
 script:
     - ../vendor/bin/phpcs --standard=psr2 --runtime-set ignore_warnings_on_exit true --report=summary ../sources
     - ./app/console pomm:generate:schema-all -d 'src/'  -a 'AppBundle\Model' my_db1
-    - test "$SYMFONY_VERSION" -eq 2 && ./bin/behat --tags '~@upper2lts' ||./bin/behat
+    - ./bin/behat --tags "~@upper${SYMFONY_VERSION}lts"
     - ./app/console pomm:generate:schema-all default_session_builder
