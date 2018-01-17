@@ -1,6 +1,8 @@
 UPGRADE FROM 2.x to 3.0
 =======================
 
+* PHP 5 is not yet supported, please upgrade to PHP 7
+
 ### Configuration
 
  * `class:session_builder` has been removed in favour of defining session builder as a service, this is to support the
