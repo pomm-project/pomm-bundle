@@ -2,52 +2,62 @@ services:
     pomm:
         class: 'PommProject\Foundation\Pomm'
         configurator: ['@pomm.session_builder.configurator_chain', configure]
+        public: true
 
     pomm.converter.entity:
         class: 'PommProject\PommBundle\Request\ParamConverter\EntityParamConverter'
         arguments: ['@pomm']
         tags:
             - { name: request.param_converter, converter: pomm.entity }
+        public: true
 
     pomm.serializer.normalizer:
         class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityNormalizer'
         tags:
             - { name: serializer.normalizer, priority: 10 }
+        public: true
+
     pomm.serializer.denormalizer:
         class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityDenormalizer'
         arguments: ['@pomm']
         tags:
             - { name: serializer.normalizer, priority: 10 }
+        public: true
 
     pomm.property_list_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\ListExtractor'
         arguments: ['@pomm']
         tags:
             - { name: "property_info.list_extractor" }
+        public: true
     pomm.property_type_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\TypeExtractor'
         arguments: ['@pomm']
         tags:
             - { name: "property_info.type_extractor" }
+        public: true
     # @deprecated
     pomm.property_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\PommExtractor'
         arguments: ['@pomm']
         tags:
             - { name: "property_info.type_extractor" }
-
+        public: true
     pomm.session_builder:
         class: 'PommProject\Foundation\SessionBuilder'
     pomm.model_manager.session_builder:
         class: 'PommProject\ModelManager\SessionBuilder'
+        public: true
 
     pomm.session_builder.configurator:
         class: 'PommProject\PommBundle\Model\Configurator'
         arguments: [null]
+        public: true
 
     pomm.session_builder.configurator_chain:
         class: 'PommProject\PommBundle\Model\ChainConfigurator'
         arguments: [['@pomm.session_builder.configurator', '@?pomm.data_collector.configurator']]
+        public: true
 
     pomm.pooler.model:
         class: 'PommProject\PommBundle\Model\ContainerModelPooler'
@@ -55,12 +65,15 @@ services:
             - ['setContainer', ['@service_container']]
         tags:
             - { name: pomm.pooler }
+        public: true
+
     pomm.pooler.model_layer:
         class: 'PommProject\PommBundle\Model\ContainerModelLayerPooler'
         calls:
             - ['setContainer', ['@service_container']]
         tags:
             - { name: pomm.pooler }
+        public: true
 
     pomm.commands.inspect_config:
         class: 'PommProject\Cli\Command\InspectConfig'
@@ -68,51 +81,63 @@ services:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true
+
     pomm.commands.inspect_database:
         class: 'PommProject\Cli\Command\InspectDatabase'
         calls:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true
+
     pomm.commands.inspect_schema:
         class: 'PommProject\Cli\Command\InspectSchema'
         calls:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true
+
     pomm.commands.inspect_relation:
         class: 'PommProject\Cli\Command\InspectRelation'
         calls:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true
     pomm.commands.generate_relation_structure:
         class: 'PommProject\Cli\Command\GenerateRelationStructure'
         calls:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true
     pomm.commands.generate_relation_model:
         class: 'PommProject\Cli\Command\GenerateRelationModel'
         calls:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true
     pomm.commands.generate_entity:
         class: 'PommProject\Cli\Command\GenerateEntity'
         calls:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true
     pomm.commands.generate_for_relation:
         class: 'PommProject\Cli\Command\GenerateForRelation'
         calls:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true
     pomm.commands.generate_for_schema:
         class: 'PommProject\Cli\Command\GenerateForSchema'
         calls:
             - ['setPomm', ['@pomm']]
         tags:
             -  { name: console.command }
+        public: true

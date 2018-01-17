@@ -4,11 +4,14 @@ services:
         arguments: ['@?kernel', '@?debug.stopwatch']
         tags:
             - { name: data_collector, template: '@Pomm/Collector/time.html.twig', id: 'time'}
+        public: true
     pomm.data_collector:
         class: 'PommProject\SymfonyBridge\DatabaseDataCollector'
         arguments: [null,'@?debug.stopwatch']
         tags:
             - { name: data_collector, template: '@Pomm/Profiler/db.html.twig', id: 'pomm'}
+        public: true
     pomm.data_collector.configurator:
         class: 'PommProject\SymfonyBridge\Configurator\DatabaseCollectorConfigurator'
         arguments: ['@?pomm.data_collector']
+        public: true

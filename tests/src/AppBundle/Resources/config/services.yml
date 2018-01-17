@@ -2,8 +2,13 @@ services:
     index_controller:
         class: AppBundle\Controller\IndexController
         arguments: ['@templating', '@pomm.default_session', '@serializer', '@property_info', '@pomm.session.service_db', '@service_model']
+        public: true
     service_model:
         class: AppBundle\Model\MyDb1\PublicSchema\ServiceModel
         arguments: ['@logger']
         tags:
             - { name: pomm.model, session: pomm.session.service_db }
+    autowire_controller:
+        class: AppBundle\Controller\AutowireController
+        tags:
+            - { name: controller.service_arguments }
