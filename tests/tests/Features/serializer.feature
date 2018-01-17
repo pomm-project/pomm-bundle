@@ -17,6 +17,6 @@ Feature: Entity Serialization
 
     Scenario:
         When I am on "/app_dev.php/deserialize"
-        Then I should see "AppBundle\Model\Config"
+        Then I should see "AppBundle\Model\MyDb1\PublicSchema\Config"
         And I should see "'name' => 'test'"
         And I should see "'value' => 'ok'"

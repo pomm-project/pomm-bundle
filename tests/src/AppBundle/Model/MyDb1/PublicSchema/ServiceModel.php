@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Model;
+namespace AppBundle\Model\MyDb1\PublicSchema;
 
 use PommProject\ModelManager\Model\Model;
 use PommProject\ModelManager\Model\Projection;
@@ -8,8 +8,8 @@ use PommProject\ModelManager\Model\ModelTrait\WriteQueries;
 
 use PommProject\Foundation\Where;
 
-use AppBundle\Model\AutoStructure\Service as ServiceStructure;
-use AppBundle\Model\Service;
+use AppBundle\Model\MyDb1\PublicSchema\AutoStructure\Service as ServiceStructure;
+use AppBundle\Model\MyDb1\PublicSchema\Service;
 
 use Psr\Log\LoggerInterface;
 
@@ -37,7 +37,7 @@ class ServiceModel extends Model
     {
         $this->logger = $logger;
         $this->structure = new ServiceStructure;
-        $this->flexible_entity_class = "\AppBundle\Model\Service";
+        $this->flexible_entity_class = "\AppBundle\Model\MyDb1\PublicSchema\Service";
     }
 
     public function getSum()
