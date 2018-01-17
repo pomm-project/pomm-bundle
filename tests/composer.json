@@ -13,6 +13,8 @@
     "require-dev": {
         "behatch/contexts": "~2.7|~3.0",
         "behat/mink-extension": "~2.2",
+        "behat/mink": "*@dev",
+        "behat/mink-browserkit-driver": "*@dev",
         "behat/mink-goutte-driver": "*"
     },
     "autoload": {
