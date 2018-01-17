@@ -16,6 +16,14 @@ If you are looking for a bundle for Pomm 1.x then look up for `pomm/pomm-bundle`
 composer require pomm-project/pomm-bundle
 ```
 
+**Note:**
+
+Pomm bundle support
+[symfony flex](https://symfony.com/doc/current/setup/flex.html), the
+[recipe](https://github.com/symfony/recipes-contrib/tree/master/pomm-project/pomm-bundle/2.3)
+add route for the profiler pannel and a minimal configuration with a `db` session
+loaded from `DATABASE_URL` environment variable.
+
 ## Setup
 
 Add the bundle in the `app/AppKernel.php` file:
