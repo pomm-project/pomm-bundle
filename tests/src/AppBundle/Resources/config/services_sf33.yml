@@ -1,0 +1,4 @@
+services:
+    AppBundle\Model\MyDb1\PublicSchema\ConfigModel:
+        tags:
+            - { name: pomm.model, session: pomm.session.service_db }
