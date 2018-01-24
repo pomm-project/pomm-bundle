@@ -15,3 +15,7 @@ services:
         class: 'PommProject\SymfonyBridge\Configurator\DatabaseCollectorConfigurator'
         arguments: ['@?pomm.data_collector']
         public: true
+    pomm.twig.extension:
+        class: 'PommProject\SymfonyBridge\Twig\Extension'
+        tags:
+            - { name: 'twig.extension' }
