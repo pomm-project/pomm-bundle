@@ -18,6 +18,7 @@ class ProfilerPass implements DI\Compiler\CompilerPassInterface
             new DI\Reference('twig'),
             new DI\Reference('pomm')
         ]);
+        $definition->setPublic(true);
         $container->setDefinition('pomm.controller.profiler', $definition);
 
         $definition = new DI\Definition(
