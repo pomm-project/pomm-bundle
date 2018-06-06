@@ -161,6 +161,30 @@ EOF;
         );
     }
 
+    public function propertyListNotPommAction()
+    {
+        $info = $this->property->getProperties('AppBundle\Book');
+
+        return new Response(
+            $this->templating->render(
+                'AppBundle:Front:properties.html.twig',
+                compact('info')
+            )
+        );
+    }
+
+    public function propertyTypeNotPommAction($property)
+    {
+        $info = $this->property->getTypes('AppBundle\Book', $property);
+
+        return new Response(
+            $this->templating->render(
+                'AppBundle:Front:property.html.twig',
+                compact('info')
+            )
+        );
+    }
+
     public function serviceModelAction()
     {
         $model = $this->serviceSession->getModel('AppBundle\Model\MyDb1\PublicSchema\ServiceModel');
