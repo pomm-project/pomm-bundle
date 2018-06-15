@@ -149,7 +149,7 @@ EOF;
         );
     }
 
-    public function propertyTypeAction(string $property)
+    public function propertyTypeAction($property)
     {
         $info = $this->property->getTypes('AppBundle\Model\MyDb1\PublicSchema\Config', $property);
 
