@@ -28,20 +28,20 @@ services:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\ListExtractor'
         arguments: ['@pomm']
         tags:
-            - { name: "property_info.list_extractor" }
+            - { name: "property_info.list_extractor" , priority: -900}
         public: true
     pomm.property_type_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\TypeExtractor'
         arguments: ['@pomm']
         tags:
-            - { name: "property_info.type_extractor" }
+            - { name: "property_info.type_extractor" , priority: -1005}
         public: true
     # @deprecated
     pomm.property_info:
         class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\PommExtractor'
         arguments: ['@pomm']
         tags:
-            - { name: "property_info.type_extractor" }
+            - { name: "property_info.type_extractor" , priority: -1005}
         public: true
     pomm.session_builder:
         class: 'PommProject\Foundation\SessionBuilder'
