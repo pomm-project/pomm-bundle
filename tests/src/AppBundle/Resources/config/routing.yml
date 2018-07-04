@@ -43,9 +43,19 @@ property_list:
     defaults: { _controller: index_controller:propertyListAction }
     methods: [GET]
 
+property_list_not_pomm:
+    path: /propertynotpomm
+    defaults: { _controller: index_controller:propertyListNotPommAction }
+    methods: [GET]
+
 property_type:
     path: /property/{property}
     defaults: { _controller: index_controller:propertyTypeAction }
+    methods: [GET]
+
+property_type_not_pomm:
+    path: /propertynotpomm/{property}
+    defaults: { _controller: index_controller:propertyTypeNotPommAction }
     methods: [GET]
 
 serviceModel:

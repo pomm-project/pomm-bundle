@@ -41,6 +41,8 @@ before_install:
     - test "$SYMFONY_VERSION" -eq 4 || composer require --no-update "symfony/lts:^$SYMFONY_VERSION"
     - cd tests/
     - test "$SYMFONY_VERSION" -eq 4 || composer require --no-update "symfony/lts:^$SYMFONY_VERSION"
+    - test "$SYMFONY_VERSION" -gt 2 -a $(echo "${TRAVIS_PHP_VERSION:0:3}>5.4" | bc) -eq 1 || composer require --no-update "phpdocumentor/reflection"
+    - test ! "$SYMFONY_VERSION" -gt 2 -o ! $(echo "${TRAVIS_PHP_VERSION:0:3}>5.4" | bc) -eq 1 || composer require --no-update "phpdocumentor/reflection-docblock"
     - cd ..
 
 install:
