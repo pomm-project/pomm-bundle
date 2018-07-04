@@ -9,3 +9,8 @@ Feature: Entity Param Converter
         When I am on "/app_dev.php/property/name"
         Then the response status code should be 200
         Then I should see "string"
+
+    Scenario: property type boolean
+        When I am on "/app_dev.php/property/global"
+        Then the response status code should be 200
+        Then I should see "bool"
