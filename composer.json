@@ -27,6 +27,9 @@
     "symfony/console": "~2.6|~3.0|~4.0",
     "squizlabs/php_codesniffer": "~2.7"
   },
+  "conflict": {
+    "pomm-project/pomm-symfony-bridge": "*"
+  },
   "suggest": {
       "symfony/web-profiler-bundle": "Display queries log",
       "sensio/distribution-bundle": "To use the entity param converter"
