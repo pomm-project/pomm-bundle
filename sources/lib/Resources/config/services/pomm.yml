@@ -12,33 +12,33 @@ services:
         public: true
 
     pomm.serializer.normalizer:
-        class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityNormalizer'
+        class: 'PommProject\PommBundle\Serializer\Normalizer\FlexibleEntityNormalizer'
         tags:
             - { name: serializer.normalizer, priority: 10 }
         public: true
 
     pomm.serializer.denormalizer:
-        class: 'PommProject\SymfonyBridge\Serializer\Normalizer\FlexibleEntityDenormalizer'
+        class: 'PommProject\PommBundle\Serializer\Normalizer\FlexibleEntityDenormalizer'
         arguments: ['@pomm']
         tags:
             - { name: serializer.normalizer, priority: 10 }
         public: true
 
     pomm.property_list_info:
-        class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\ListExtractor'
+        class: 'PommProject\PommBundle\PropertyInfo\Extractor\ListExtractor'
         arguments: ['@pomm']
         tags:
             - { name: "property_info.list_extractor" }
         public: true
     pomm.property_type_info:
-        class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\TypeExtractor'
+        class: 'PommProject\PommBundle\PropertyInfo\Extractor\TypeExtractor'
         arguments: ['@pomm']
         tags:
             - { name: "property_info.type_extractor" }
         public: true
     # @deprecated
     pomm.property_info:
-        class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\PommExtractor'
+        class: 'PommProject\PommBundle\PropertyInfo\Extractor\PommExtractor'
         arguments: ['@pomm']
         tags:
             - { name: "property_info.type_extractor" }

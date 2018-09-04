@@ -12,7 +12,7 @@ class ProfilerPass implements DI\Compiler\CompilerPassInterface
             return;
         }
 
-        $definition = new DI\Definition("PommProject\\SymfonyBridge\\Controller\\PommProfilerController", [
+        $definition = new DI\Definition("PommProject\\PommBundle\\Controller\\PommProfilerController", [
             new DI\Reference('router'),
             new DI\Reference('profiler'),
             new DI\Reference('twig'),
