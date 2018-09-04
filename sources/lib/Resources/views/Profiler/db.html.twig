@@ -1,0 +1,213 @@
+{% extends '@Pomm/Profiler/pomm_layout.html.twig' %}
+
+{% block panel %}
+    <h2>Queries</h2>
+
+    {% if collector.queries is empty %}
+        <p>
+            <em>No queries.</em>
+        </p>
+    {% else %}
+        <p>
+            <button type="button" class="sf-button" onclick="expandAllQueries(this);" data-action="expand">
+                    <span class="border-l">
+                        <span class="border-r">
+                            <span class="btn-bg">Expand all queries</span>
+                        </span>
+                    </span>
+            </button>
+        </p>
+        <table class="alt" id="queriesPlaceholder">
+            <thead>
+            <tr>
+                <th onclick="javascript:sortTable(this, 0, 'queries')" data-sort-direction="-1" style="cursor: pointer;">#<span>&#9650;</span></th>
+                <th onclick="javascript:sortTable(this, 1, 'queries')" style="cursor: pointer;">Time<span></span></th>
+                <th style="width: 100%;">Info</th>
+            </tr>
+            </thead>
+            <tbody id="queries" >
+            {% for i, query in collector.queries %}
+                {% if loop.last and collector.exception is not null %}
+                    <tr id="queryNo-{{ i }}"  data-target-id="{{ i }}" class="{{ cycle(['odd', 'even'], i) }} error">
+                        <td>{{ i }}</td>
+                        <td>-</td>
+                        <td id="queryNo-{{ i }}">
+                            <div class="query-section" data-state="collapsed" onclick="return expandQuery(this);" title="Expand query" data-target-id="code-{{ i }}" style="cursor: pointer;">
+                                <img alt="+" src="data:image/gif;base64,R0lGODlhEgASAMQTANft99/v+Ga44bHb8ITG52S44dXs9+z1+uPx+YvK6WC24G+944/M6W28443L6dnu+Ge54v/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABMALAAAAAASABIAQAVS4DQBTiOd6LkwgJgeUSzHSDoNaZ4PU6FLgYBA5/vFID/DbylRGiNIZu74I0h1hNsVxbNuUV4d9SsZM2EzWe1qThVzwWFOAFCQFa1RQq6DJB4iIQA7" style="display: inline;" />
+                                <img alt="-" src="data:image/gif;base64,R0lGODlhEgASAMQSANft94TG57Hb8GS44ez1+mC24IvK6ePx+Wa44dXs92+942e54o3L6W2844/M6dnu+P/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABIALAAAAAASABIAQAVCoCQBTBOd6Kk4gJhGBCTPxysJb44K0qD/ER/wlxjmisZkMqBEBW5NHrMZmVKvv9hMVsO+hE0EoNAstEYGxG9heIhCADs=" style="display: none;" />
+                                <span style="display: none">Shrink query</span>
+                                <span id="smallcode-{{ i }}">
+                                    {{ collector.exception|raw|slice(0,200) }}...
+                                </span>
+                            </div>
+                            <small>
+                                <strong>Connection</strong> {% if query.session_stamp != null %}{{ query.session_stamp }}{% else %} N/A {% endif %}
+                                | <strong>Parameters</strong>: {{ query.parameters|yaml_dump }}
+                                | <strong>Entity</strong>: <em>{% if query.flexible_entity is defined %}{{ query.flexible_entity }}{% else %} - {% endif %}</em>
+                            </small></br />
+                            <code id="code-{{ i }}" style="font-size: 14px;">
+                                {{ collector.exception|nl2br|raw }}
+                            </code>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr id="queryNo-{{ i }}"  data-target-id="{{ i }}" class="{{ cycle(['odd', 'even'], i) }}"  data-target-id="{{ i }}" data-extra-info="{{ '%0.2f'|format(query.time_ms) }}">
+                        <td>{{ i }}</td>
+                        <td>{{ '%0.2f'|format(query.time_ms) }} &nbsp;ms</td>
+                        <td id="queryNo-{{ i }}">
+                            <div class="query-section" data-state="collapsed" onclick="return expandQuery(this);" title="Expand query" data-target-id="code-{{ i }}" style="cursor: pointer;">
+                                <img alt="+" src="data:image/gif;base64,R0lGODlhEgASAMQTANft99/v+Ga44bHb8ITG52S44dXs9+z1+uPx+YvK6WC24G+944/M6W28443L6dnu+Ge54v/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABMALAAAAAASABIAQAVS4DQBTiOd6LkwgJgeUSzHSDoNaZ4PU6FLgYBA5/vFID/DbylRGiNIZu74I0h1hNsVxbNuUV4d9SsZM2EzWe1qThVzwWFOAFCQFa1RQq6DJB4iIQA7" style="display: inline;" />
+                                <img alt="-" src="data:image/gif;base64,R0lGODlhEgASAMQSANft94TG57Hb8GS44ez1+mC24IvK6ePx+Wa44dXs92+942e54o3L6W2844/M6dnu+P/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABIALAAAAAASABIAQAVCoCQBTBOd6Kk4gJhGBCTPxysJb44K0qD/ER/wlxjmisZkMqBEBW5NHrMZmVKvv9hMVsO+hE0EoNAstEYGxG9heIhCADs=" style="display: none;" />
+                                <span style="display: none">Shrink query</span>
+                                <span id="smallcode-{{ i }}">
+                                    {{ query.sql|slice(0,200) }}...
+                                </span>
+                            </div>
+
+                            <code id="code-{{ i }}" style="font-size: 14px;">
+                                {{ query.sql|sql_format|raw }}
+                            </code>
+                            <small>
+                                <strong>Connection</strong> {% if query.session_stamp != null %}{{ query.session_stamp }}{% else %} N/A {% endif %}
+                                | <strong>Parameters</strong>: {{ query.parameters|yaml_dump }}
+                                | <strong>Results</strong>: {{ query.result_count }}
+                                | <strong>Entity</strong>: <em>{% if query.flexible_entity is defined %}{{ query.flexible_entity }}{% else %} - {% endif %}</em>
+                            </small><br/>
+                            {% if query.session_stamp != null  %}
+                                [<a href="{{ path('_pomm_profiler_explain', { 'token': token, "index_query": i}) }}" onclick="return explain(this);" style="text-decoration: none;" title="Explains the query" data-target-id="explain-{{ i }}" >
+                                <img alt="+" src="data:image/gif;base64,R0lGODlhEgASAMQTANft99/v+Ga44bHb8ITG52S44dXs9+z1+uPx+YvK6WC24G+944/M6W28443L6dnu+Ge54v/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABMALAAAAAASABIAQAVS4DQBTiOd6LkwgJgeUSzHSDoNaZ4PU6FLgYBA5/vFID/DbylRGiNIZu74I0h1hNsVxbNuUV4d9SsZM2EzWe1qThVzwWFOAFCQFa1RQq6DJB4iIQA7" style="display: inline; width: 12px; height: 12px;" />
+                                <img alt="-" src="data:image/gif;base64,R0lGODlhEgASAMQSANft94TG57Hb8GS44ez1+mC24IvK6ePx+Wa44dXs92+942e54o3L6W2844/M6dnu+P/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABIALAAAAAASABIAQAVCoCQBTBOd6Kk4gJhGBCTPxysJb44K0qD/ER/wlxjmisZkMqBEBW5NHrMZmVKvv9hMVsO+hE0EoNAstEYGxG9heIhCADs=" style="display: none; width: 12px; height: 12px;" />
+                                <span style="vertical-align:top">Explain query</span>
+                            </a>]
+                                <div id="explain-{{ i }}" class="loading"></div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <script type="text/javascript">//<![CDATA[
+        function explain(link) {
+            "use strict";
+            var imgs = link.children,
+                    target = link.getAttribute('data-target-id');
+            Sfjs.toggle(target, imgs[0], imgs[1])
+                    .load(
+                    target,
+                    link.href,
+                    null,
+                    function(xhr, el) {
+                        el.innerHTML = 'An error occurred while loading the details';
+                        Sfjs.removeClass(el, 'loading');
+                    }
+            );
+            return false;
+        }
+        function expandAllQueries(button) {
+            var queries = document.getElementsByClassName('query-section'),
+                    i = queries.length,
+                    action = button.getAttribute('data-action');
+            if (action == 'expand') {
+                button.getElementsByClassName('btn-bg')[0].innerHTML = 'Collapse all queries';
+                while (i--) {
+                    if (queries[i].getAttribute('data-state') == 'collapsed') {
+                        expandQuery(queries[i]);
+                    }
+                }
+            } else {
+                button.getElementsByClassName('btn-bg')[0].innerHTML = 'Expand all queries';
+                while (i--) {
+                    if (queries[i].getAttribute('data-state') == 'expanded') {
+                        expandQuery(queries[i]);
+                    }
+                }
+            }
+            button.setAttribute('data-action', action == 'expand' ? 'collapse' : 'expand');
+        }
+        function expandQuery(link) {
+            var sections = link.children,
+                    target = link.getAttribute('data-target-id');
+
+            if (document.getElementById('small' + target).style.display != 'none') {
+                document.getElementById('small' + target).style.display = 'none';
+                document.getElementById(target).style.display = 'inline';
+                sections[0].style.display = 'none';
+                sections[1].style.display = 'inline';
+                sections[2].style.display = 'inline';
+                link.setAttribute('data-state', 'expanded');
+            } else {
+                document.getElementById('small' + target).style.display = 'inline';
+                document.getElementById(target).style.display = 'none';
+                sections[0].style.display = 'inline';
+                sections[1].style.display = 'none';
+                sections[2].style.display = 'none';
+                link.setAttribute('data-state', 'collapsed');
+            }
+            return false;
+        }
+        function toggleRunnableQuery(target) {
+            var targetId = target.getAttribute('target-data-id').replace('original-query', ''),
+                    targetElement = document.getElementById(target.getAttribute('target-data-id')),
+                    elem;
+            if (targetElement.style.display != 'block') {
+                targetElement.style.display = 'block';
+                target.innerHTML = 'Hide runnable query';
+                document.getElementById('smallcode' + targetId).style.display = 'none';
+                document.getElementById('code' + targetId).style.display = 'none';
+                elem = document.getElementById('code' + targetId).parentElement.children[0];
+                elem.children[0].style.display = 'inline';
+                elem.children[1].style.display = 'none';
+                elem.children[2].style.display = 'none';
+            } else {
+                targetElement.style.display = 'none';
+                target.innerHTML = 'Display runnable query';
+                document.getElementById('smallcode' + targetId).style.display = 'inline';
+            }
+        }
+        function sortTable(header, column, targetId) {
+            "use strict";
+            var direction = parseInt(header.getAttribute('data-sort-direction')) || 1,
+                    items = [],
+                    target = document.getElementById(targetId),
+                    rows = target.children,
+                    headers = header.parentElement.children,
+                    i;
+            for (i = 0; i < rows.length; ++i) {
+                items.push(rows[i]);
+            }
+            for (i = 0; i < headers.length; ++i) {
+                headers[i].removeAttribute('data-sort-direction');
+                if (headers[i].children.length > 0) {
+                    headers[i].children[0].innerHTML = '';
+                }
+            }
+            header.setAttribute('data-sort-direction', (-1*direction).toString());
+            header.children[0].innerHTML = direction > 0 ? '&#9650;' : '&#9660;';
+            items.sort(function(a, b) {
+                return direction*(parseFloat(a.children[column].innerHTML) - parseFloat(b.children[column].innerHTML));
+            });
+            for (i = 0; i < items.length; ++i) {
+                Sfjs.removeClass(items[i], i % 2 ? 'even' : 'odd');
+                Sfjs.addClass(items[i], i % 2 ? 'odd' : 'even');
+                target.appendChild(items[i]);
+            }
+        }
+        //]]></script>
+
+    <style>
+        #collector-content table tr.error td{
+            background-color: #f66;
+        }
+        code {
+            display: none;
+        }
+        code pre {
+            padding: 5px;
+        }
+        code.explain{
+            display: block;
+        }
+    </style>
+{% endblock %}

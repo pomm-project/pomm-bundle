@@ -1,0 +1,43 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar%}
+    {% set icon %}
+        <span>
+            <img alt="Pomm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAQAAADYBBcfAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQffAwkPNzColualAAACRElEQVQ4y52UTUhUURTHf+85pYPlQq2eiyBzggimFhFEVor2Be0MBatVOm9XmI2iULtwMQyU1EYZIQIJTKMg2jhBrzCKLCgklKyhEJQYlNQmk+aeFjPjvNE3Zv5X93z8OPeec+8FB7UBPo/Zb/b7PAlrpTRnb2NA9yeWKhhqRVam6JmmD9jXMjAU9y8l+M1ZsxluLwNz0ssjfGPTsdKH8fM3th/6HJn5XpgMbuTk/jOTn959MXm7vOJFQDcqw/ogXgHZUtZW1vzBvahSeV590AxjwH07WMstKrq1Cartm/Huvem6YKm0o5oJs7uWDtyJ5hzWXFdopzAVn2NY0k1biPbNPN2Vl8anCahASDSozGfeXikTBJj72FkYMVwJ44f6TWkoprMGbd5z1bj2BlDqVTyfraKtGIddFpbN2nGgK7a4wEEtWdjlDI3TxzgwRB2elNMttgM4gDk84BF5bAC+cp1yfPzz5gAoajhFagw76Xbck0NFAeqp4h4RphjNcp2zNmcbTdSRi8oSX3Uc5dzl8npAgBrC6wOh4P/BX7HssVXBBvfr5+sC0bqOtkfHxrOAizHVwrQzmUO0uMNzaTQ6lRwwTKsWFQMdXooRfFakeog7w7nyfneN0TmMRlx6QkVG8IUs/XLn6KXCoFersr/Hs+QDmoxpOoqCJ8WNdyYDtNrP2AswZVXLcRlxumIyop14fDoySRLLaI4FlIQt76w/80eQ+T9+y1sySMb7dNRPJCgiUi+N0hBk7RJAPDJQN9DggSbHnL/FPsPXzOozfAAAAABJRU5ErkJggg==" />
+            <span class="
+                sf-toolbar-status
+                {% if 50 < collector.querycount %} sf-toolbar-status-yellow{% endif %}
+                {% if collector.exception is not null %} sf-toolbar-status-red{% endif %}
+            ">{{ collector.querycount }}</span>
+            {% if collector.querycount > 0 %}
+                <span class="sf-toolbar-info-piece-additional-detail">in {{ '%0.2f'|format(collector.time) }} ms</span>
+            {% endif %}
+        </span>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>DB Queries</b>
+            <span>{{ collector.querycount }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Query time</b>
+            <span>{{ '%0.2f'|format(collector.time) }} ms</span>
+        </div>
+    {% endset %}
+
+    {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon"><img alt="Pomm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAQAAADYBBcfAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQffAwkPNzColualAAACRElEQVQ4y52UTUhUURTHf+85pYPlQq2eiyBzggimFhFEVor2Be0MBatVOm9XmI2iULtwMQyU1EYZIQIJTKMg2jhBrzCKLCgklKyhEJQYlNQmk+aeFjPjvNE3Zv5X93z8OPeec+8FB7UBPo/Zb/b7PAlrpTRnb2NA9yeWKhhqRVam6JmmD9jXMjAU9y8l+M1ZsxluLwNz0ssjfGPTsdKH8fM3th/6HJn5XpgMbuTk/jOTn959MXm7vOJFQDcqw/ogXgHZUtZW1vzBvahSeV590AxjwH07WMstKrq1Cartm/Huvem6YKm0o5oJs7uWDtyJ5hzWXFdopzAVn2NY0k1biPbNPN2Vl8anCahASDSozGfeXikTBJj72FkYMVwJ44f6TWkoprMGbd5z1bj2BlDqVTyfraKtGIddFpbN2nGgK7a4wEEtWdjlDI3TxzgwRB2elNMttgM4gDk84BF5bAC+cp1yfPzz5gAoajhFagw76Xbck0NFAeqp4h4RphjNcp2zNmcbTdSRi8oSX3Uc5dzl8npAgBrC6wOh4P/BX7HssVXBBvfr5+sC0bqOtkfHxrOAizHVwrQzmUO0uMNzaTQ6lRwwTKsWFQMdXooRfFakeog7w7nyfneN0TmMRlx6QkVG8IUs/XLn6KXCoFersr/Hs+QDmoxpOoqCJ8WNdyYDtNrP2AswZVXLcRlxumIyop14fDoySRLLaI4FlIQt76w/80eQ+T9+y1sySMb7dNRPJCgiUi+N0hBk7RJAPDJQN9DggSbHnL/FPsPXzOozfAAAAABJRU5ErkJggg==" /></span>
+        <strong>Pomm</strong>
+        <span class="count">
+            <span>{{ collector.querycount }}</span>
+            <span>{{ '%0.0f'|format(collector.time) }} ms</span>
+        </span>
+    </span>
+{% endblock %}
+
+
