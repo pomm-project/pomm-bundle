@@ -1,0 +1,6 @@
+<h2>Plan</h2>
+<code class="explain" style="font-size: 14px;"><pre>
+{% for i, line in explain %}
+    <span>{{ "%02d"|format(i) }}</span> | <span>{{ line['QUERY PLAN'] }}</span>
+{% endfor %}
+</pre></code>

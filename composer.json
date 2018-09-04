@@ -20,12 +20,14 @@
     "jdorn/sql-formatter": "~1.2",
     "pomm-project/model-manager": "~2.0",
     "pomm-project/cli": "~2.0",
-    "pomm-project/pomm-symfony-bridge": "~2.5",
     "symfony/framework-bundle": "~2.8|~3.0|~4.0"
   },
   "require-dev": {
     "symfony/console": "~2.6|~3.0|~4.0",
     "squizlabs/php_codesniffer": "~2.7"
+  },
+  "conflict": {
+    "pomm-project/pomm-symfony-bridge": "*"
   },
   "suggest": {
       "symfony/web-profiler-bundle": "Display queries log",

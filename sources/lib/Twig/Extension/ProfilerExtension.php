@@ -45,9 +45,9 @@ class ProfilerExtension extends \Twig_Extension
      */
     private function getTemplateDirectory()
     {
-        $r = new \ReflectionClass('PommProject\\SymfonyBridge\\DatabaseDataCollector');
+        $r = new \ReflectionClass('PommProject\\PommBundle\\DatabaseDataCollector');
 
-        return dirname(dirname(dirname($r->getFileName()))).'/views';
+        return dirname($r->getFileName()).'/Resources/views';
     }
 
     /**

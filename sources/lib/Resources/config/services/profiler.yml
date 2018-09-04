@@ -6,12 +6,12 @@ services:
             - { name: data_collector, template: '@Pomm/Collector/time.html.twig', id: 'time'}
         public: true
     pomm.data_collector:
-        class: 'PommProject\SymfonyBridge\DatabaseDataCollector'
+        class: 'PommProject\PommBundle\DatabaseDataCollector'
         arguments: [null,'@?debug.stopwatch']
         tags:
             - { name: data_collector, template: '@Pomm/Profiler/db.html.twig', id: 'pomm'}
         public: true
     pomm.data_collector.configurator:
-        class: 'PommProject\SymfonyBridge\Configurator\DatabaseCollectorConfigurator'
+        class: 'PommProject\PommBundle\Configurator\DatabaseCollectorConfigurator'
         arguments: ['@?pomm.data_collector']
         public: true
