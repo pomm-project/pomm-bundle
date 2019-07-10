@@ -9,7 +9,7 @@ use \Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use \Symfony\Component\Serializer\Serializer;
 use \Symfony\Component\HttpFoundation\Response;
 use \Symfony\Component\Templating\EngineInterface;
-use \Symfony\Component\PropertyInfo\PropertyInfoExtractor;
+use \Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface;
 
 class IndexController
 {
@@ -23,7 +23,7 @@ class IndexController
         EngineInterface $templating,
         Session $pomm,
         Serializer $serializer,
-        PropertyInfoExtractor $property,
+        PropertyInfoExtractorInterface $property,
         Session $serviceSession,
         ServiceModel $serviceModel
     ) {
