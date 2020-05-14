@@ -10,8 +10,6 @@ php:
     - "nightly"
 
 env:
-    global:
-        - SELENIUM_VERSION=3.141.59
     matrix:
         - SYMFONY_VERSION=3
         - SYMFONY_VERSION=4
@@ -67,7 +65,7 @@ before_script:
     - wget --no-verbose https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER_VERSION/chromedriver_linux64.zip
     - unzip chromedriver_linux64.zip -d ~/bin
 
-    - wget "https://selenium-release.storage.googleapis.com/${SELENIUM_VERSION%%.[[:digit:]]}/selenium-server-standalone-${SELENIUM_VERSION}.jar" -O selenium.jar
+    - wget "https://selenium-release.storage.googleapis.com/3.141.59/selenium-server-standalone-3.141.59.jar" -O selenium.jar
     - java -jar selenium.jar &> /dev/null &
 
 
