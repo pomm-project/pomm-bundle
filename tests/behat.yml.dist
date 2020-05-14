@@ -6,7 +6,17 @@ default:
                 - FeatureContext
                 - behatch:context:json
     extensions:
-        Behat\MinkExtension\ServiceContainer\MinkExtension:
+        Behat\MinkExtension:
             base_url: 'http://localhost:8080'
-            goutte: ~
+            browser_name: chrome
+            sessions:
+                default:
+                    selenium2:
+                        wd_host: "http://localhost:4444/wd/hub"
+                        browser: chrome
+                        capabilities:
+                            extra_capabilities:
+                                chromeOptions:
+                                    args:
+                                        - "--headless"
         Behatch\Extension: ~

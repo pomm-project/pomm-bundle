@@ -7,7 +7,6 @@
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Debug\Debug;
 
 set_time_limit(0);
 
@@ -18,7 +17,11 @@ $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?:
 $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
 
 if ($debug) {
-    Debug::enable();
+    if (class_exists('\Symfony\Component\ErrorHandler\Debug')) {
+        \Symfony\Component\ErrorHandler\Debug::enable();
+    }else{
+        \Symfony\Component\Debug\Debug::enable();
+    }
 }
 
 $kernel = new AppKernel($env, $debug);
