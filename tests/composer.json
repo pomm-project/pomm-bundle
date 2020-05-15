@@ -12,8 +12,9 @@
         "jdorn/sql-formatter": "~1.2"
     },
     "require-dev": {
-        "behatch/contexts": "~2.7|~3.0",
-        "behat/mink-selenium2-driver": "dev-master"
+        "behatch/contexts": "~3.0",
+        "behat/mink-selenium2-driver": "dev-master",
+        "instaclick/php-webdriver": "1.4.7"
     },
     "autoload": {
         "psr-0": { "AppBundle\\": "src/" },
