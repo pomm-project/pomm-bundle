@@ -1,14 +1,14 @@
 {
     "require": {
-        "symfony/symfony": "~3.4|~4.4|~5.0",
+        "symfony/symfony": "^3.4|^4.3|^5.0",
         "symfony/monolog-bundle": "~3.0",
         "twig/extensions": "~1.0",
-        "sensio/framework-extra-bundle": "~3.4|~4.4|~5.0",
+        "sensio/framework-extra-bundle": "^3.4|^4.3|^5.0",
         "pomm-project/cli": "~2.0",
         "pomm-project/foundation": "~2.0",
         "pomm-project/model-manager": "~2.0",
         "pomm-project/pomm-symfony-bridge": "~2.5|dev-master",
-        "symfony/framework-bundle": "~3.4|~4.4|~5.0",
+        "symfony/framework-bundle": "^3.4|^4.3|^5.0",
         "jdorn/sql-formatter": "~1.2"
     },
     "require-dev": {

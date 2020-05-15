@@ -11,18 +11,27 @@ php:
     - "7.3"
     - "7.4"
     - "nightly"
-
 env:
-    matrix:
-        - SYMFONY_REQUIRE=3.4.*
-        - SYMFONY_REQUIRE=4.3.*
-        - SYMFONY_REQUIRE=4.4.*
-        - SYMFONY_REQUIRE=5.*
+    global:
+        - COMPOSER_MEMORY_LIMIT=-1
 
 matrix:
     allow_failures:
         - php: nightly
     fast_finish: true
+    include:
+        - php: 7.1
+          env: COMPOSER_FLAGS="--prefer-lowest"
+        - php: 7.2
+        - php: 7.3
+        - php: 7.3
+          env: SYMFONY_REQUIRE="3.4.*"
+        - php: 7.3
+          env: SYMFONY_REQUIRE="4.3.*"
+        - php: 7.3
+          env: SYMFONY_REQUIRE="4.4.*"
+        - php: 7.4
+          env: SYMFONY_REQUIRE="5.*"
 
 cache:
     directories:
@@ -31,6 +40,7 @@ cache:
 services: postgresql
 
 before_install:
+    - phpenv config-add travis.php.ini
     - psql -c 'CREATE DATABASE pomm_test' -U postgres -h 127.0.0.1 postgres
     - psql -c 'CREATE TABLE config (name character varying(25) PRIMARY KEY, value character varying(25))' -U postgres -h 127.0.0.1 pomm_test
     - psql -c "INSERT INTO config VALUES ('test', 'value')" -U postgres -h 127.0.0.1 pomm_test
@@ -46,13 +56,9 @@ before_install:
     - cd ..
 
 install:
-    - echo 'memory_limit=-1' > travis.php.ini
-    - phpenv config-add travis.php.ini
-
-    - composer update
-
+    - composer update -n --prefer-dist --prefer-stable
     - cd tests/
-    - composer update
+    - composer update -n --prefer-dist --prefer-stable
     - rm -rf vendor/pomm-project/pomm-bundle
     - ln -s ../../../ vendor/pomm-project/pomm-bundle
 
@@ -71,3 +77,35 @@ script:
     - ./app/console pomm:generate:schema-all -d 'src/'  -a 'AppBundle\Model' my_db1
     - ./bin/behat --tags "~@upper${CURRENT_SYMFONY_VERSION}lts"
     - ./app/console pomm:generate:schema-all default_session_builder
+
+jobs:
+    include:
+        # Tests the lowest set of dependencies
+        - php: 7.1
+          env: LOWEST SYMFONY_DEPRECATIONS_HELPER=999999
+          install:
+              - travis_retry composer update -n --prefer-lowest --prefer-stable --prefer-dist
+
+        - php: 7.3
+          env: SYMFONY_REQUIRE="3.4.*"
+
+        # Test against latest Symfony 4.3 stable
+        - php: 7.3
+          env: SYMFONY_REQUIRE="4.3.*"
+          install:
+              - composer require --dev symfony/messenger --no-update
+              - travis_retry composer update -n --prefer-dist --prefer-stable
+
+        # Test against latest Symfony 4.4 dev
+        - php: 7.3
+          env: SYMFONY_REQUIRE="4.4.*"
+          install:
+              - composer require --dev symfony/messenger --no-update
+              - travis_retry composer update -n --prefer-dist
+
+        # Test dev versions
+        - php: 7.3
+          if: type = cron
+          env: DEV
+          install:
+              - travis_retry composer update -n --prefer-dist
