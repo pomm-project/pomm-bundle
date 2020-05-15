@@ -64,6 +64,11 @@ before_script:
       )
     - echo $CURRENT_SYMFONY_VERSION
 
+    - CHROME_MAIN_VERSION=`google-chrome-stable --version | sed -E 's/(^Google Chrome |\.[0-9]+ )//g'`
+    - CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAIN_VERSION"`
+    - curl "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
+    - unzip chromedriver_linux64.zip -d ~/bin
+    
     - wget "https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar" -O selenium.jar
     - java -jar selenium.jar &> /dev/null &
 
