@@ -49,9 +49,9 @@ before_install:
     - cd ..
 
 install:
-    - composer update -n --prefer-dist --prefer-stable
+    - composer update -n --prefer-dist --prefer-stable $COMPOSER_FLAGS
     - cd tests/
-    - composer update -n --prefer-dist --prefer-stable
+    - composer update -n --prefer-dist --prefer-stable $COMPOSER_FLAGS
     - rm -rf vendor/pomm-project/pomm-bundle
     - ln -s ../../../ vendor/pomm-project/pomm-bundle
 
