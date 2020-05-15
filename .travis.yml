@@ -14,9 +14,10 @@ php:
 
 env:
     matrix:
-        - SYMFONY_VERSION=3
-        - SYMFONY_VERSION=4
-        - SYMFONY_VERSION=5
+        - SYMFONY_REQUIRE=3.4.*
+        - SYMFONY_REQUIRE=4.3.*
+        - SYMFONY_REQUIRE=4.4.*
+        - SYMFONY_REQUIRE=5.*
 
 matrix:
     allow_failures:
@@ -39,9 +40,9 @@ before_install:
 
     - php -S localhost:8080 -t tests/web &> /dev/null &
     - ln -fs parameters.yml.dist tests/app/config/parameters.yml
-    - test "$SYMFONY_VERSION" -eq 5 || composer require --no-update "symfony/lts:^$SYMFONY_VERSION"
+    - composer global require --no-progress --no-scripts --no-plugins symfony/flex dev-master
     - cd tests/
-    - test "$SYMFONY_VERSION" -eq 5 || composer require --no-update "symfony/lts:^$SYMFONY_VERSION"
+    - composer global require --no-progress --no-scripts --no-plugins symfony/flex dev-master
     - cd ..
 
 install:
@@ -56,19 +57,11 @@ install:
     - ln -s ../../../ vendor/pomm-project/pomm-bundle
 
 before_script:
-    - |
-      export CURRENT_SYMFONY_VERSION=$(                                       \
-          composer show --format=json                                         \
-          | jq '.installed[] | select(.name == "symfony/symfony") | .version' \
-          | sed 's/^"v\([0-9]\+\)\.[^"]*"/\1/'                                \
-      )
-    - echo $CURRENT_SYMFONY_VERSION
-
     - CHROME_MAIN_VERSION=`google-chrome-stable --version | sed -E 's/(^Google Chrome |\.[0-9]+ )//g'`
     - CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAIN_VERSION"`
     - curl "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
     - unzip chromedriver_linux64.zip -d ~/bin
-    
+
     - wget "https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar" -O selenium.jar
     - java -jar selenium.jar &> /dev/null &
 
