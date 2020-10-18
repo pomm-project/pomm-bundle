@@ -9,7 +9,7 @@ use \Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use \Symfony\Component\Serializer\Serializer;
 use \Symfony\Component\HttpFoundation\Response;
 use \Symfony\Component\Templating\EngineInterface;
-use \Symfony\Component\PropertyInfo\PropertyInfoExtractor;
+use \Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface;
 
 class IndexController
 {
@@ -20,10 +20,10 @@ class IndexController
     private $serviceModel;
 
     public function __construct(
-        EngineInterface $templating,
+        $templating,
         Session $pomm,
         Serializer $serializer,
-        PropertyInfoExtractor $property,
+        PropertyInfoExtractorInterface $property,
         Session $serviceSession,
         ServiceModel $serviceModel
     ) {
@@ -42,7 +42,7 @@ class IndexController
 
         return new Response(
             $this->templating->render(
-                'AppBundle:Front:index.html.twig'
+                'Front/index.html.twig'
             )
         );
     }
@@ -51,7 +51,7 @@ class IndexController
     {
         return new Response(
             $this->templating->render(
-                'AppBundle:Front:get.html.twig',
+                'Front/get.html.twig',
                 compact('config')
             )
         );
@@ -66,7 +66,7 @@ class IndexController
     {
         return new Response(
             $this->templating->render(
-                'AppBundle:Front:get.html.twig',
+                'Front/get.html.twig',
                 compact('config')
             )
         );
@@ -81,7 +81,7 @@ class IndexController
     {
         return new Response(
             $this->templating->render(
-                'AppBundle:Front:get.html.twig',
+                'Front/get.html.twig',
                 compact('config')
             )
         );
@@ -96,7 +96,7 @@ class IndexController
     {
         return new Response(
             $this->templating->render(
-                'AppBundle:Front:get.html.twig',
+                'Front/get.html.twig',
                 compact('config')
             )
         );
@@ -143,7 +143,7 @@ EOF;
 
         return new Response(
             $this->templating->render(
-                'AppBundle:Front:properties.html.twig',
+                'Front/properties.html.twig',
                 compact('info')
             )
         );
@@ -155,7 +155,7 @@ EOF;
 
         return new Response(
             $this->templating->render(
-                'AppBundle:Front:property.html.twig',
+                'Front/property.html.twig',
                 compact('info')
             )
         );

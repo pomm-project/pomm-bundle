@@ -13,9 +13,5 @@ class AppExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-
-        if (version_compare(\Symfony\Component\HttpKernel\Kernel::VERSION, '3.3', '>=')) {
-            $loader->load('services_sf33.yml');
-        }
     }
 }

@@ -1,26 +1,31 @@
 language: php
 
+addons:
+    chrome: stable
+
 sudo: false
 
-php:
-    - "5.4"
-    - "5.5"
-    - "5.6"
-    - "7.0"
-    - "7.1"
-    - "7.2"
-    - "nightly"
-
 env:
-    matrix:
-        - SYMFONY_VERSION=2
-        - SYMFONY_VERSION=3
-        - SYMFONY_VERSION=4
+    global:
+        - COMPOSER_MEMORY_LIMIT=-1
 
 matrix:
     allow_failures:
         - php: nightly
     fast_finish: true
+    include:
+        - php: 7.1
+          env: COMPOSER_FLAGS="--prefer-lowest"
+        - php: 7.2
+        - php: 7.3
+        - php: 7.3
+          env: SYMFONY_REQUIRE="3.4.*"
+        - php: 7.3
+          env: SYMFONY_REQUIRE="4.3.*"
+        - php: 7.3
+          env: SYMFONY_REQUIRE="4.4.*"
+        - php: 7.4
+          env: SYMFONY_REQUIRE="5.*"
 
 cache:
     directories:
@@ -38,33 +43,30 @@ before_install:
 
     - php -S localhost:8080 -t tests/web &> /dev/null &
     - ln -fs parameters.yml.dist tests/app/config/parameters.yml
-    - test "$SYMFONY_VERSION" -eq 4 || composer require --no-update "symfony/lts:^$SYMFONY_VERSION"
+    - composer global require --no-progress --no-scripts --no-plugins symfony/flex dev-master
     - cd tests/
-    - test "$SYMFONY_VERSION" -eq 4 || composer require --no-update "symfony/lts:^$SYMFONY_VERSION"
+    - composer global require --no-progress --no-scripts --no-plugins symfony/flex dev-master
     - cd ..
 
 install:
-    - echo 'memory_limit=-1' > travis.php.ini
-    - phpenv config-add travis.php.ini
-
-    - composer update
-
+    - composer update -n --prefer-dist --prefer-stable $COMPOSER_FLAGS
     - cd tests/
-    - composer update
+    - composer update -n --prefer-dist --prefer-stable $COMPOSER_FLAGS
     - rm -rf vendor/pomm-project/pomm-bundle
     - ln -s ../../../ vendor/pomm-project/pomm-bundle
 
 before_script:
-    - |
-      export CURRENT_SYMFONY_VERSION=$(                                       \
-          composer show --format=json                                         \
-          | jq '.installed[] | select(.name == "symfony/symfony") | .version' \
-          | sed 's/^"v\([0-9]\+\)\.[^"]*"/\1/'                                \
-      )
-    - echo $CURRENT_SYMFONY_VERSION
+    - CHROME_MAIN_VERSION=`google-chrome-stable --version | sed -E 's/(^Google Chrome |\.[0-9]+ )//g'`
+    - CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAIN_VERSION"`
+    - curl "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
+    - unzip chromedriver_linux64.zip -d ~/bin
+
+    - wget "https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar" -O selenium.jar
+    - java -jar selenium.jar &> /dev/null &
+
 
 script:
     - ../vendor/bin/phpcs --standard=psr2 --runtime-set ignore_warnings_on_exit true --report=summary ../sources
     - ./app/console pomm:generate:schema-all -d 'src/'  -a 'AppBundle\Model' my_db1
-    - ./bin/behat --tags "~@upper${CURRENT_SYMFONY_VERSION}lts"
+    - ./bin/behat
     - ./app/console pomm:generate:schema-all default_session_builder
