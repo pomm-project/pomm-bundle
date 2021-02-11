@@ -9,6 +9,11 @@
  */
 namespace PommProject\PommBundle\Twig\Extension;
 
+use Twig\Error\LoaderError;
+use Twig\Extension\AbstractExtension;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFilter;
+
 /**
  * ProfilerExtension
  *
@@ -18,9 +23,9 @@ namespace PommProject\PommBundle\Twig\Extension;
  * @copyright 2014 Grégoire HUBERT
  * @author Nicolas JOSEPH
  * @license X11 {@link http://opensource.org/licenses/mit-license.php}
- * @see \Twig_Extension
+ * @see AbstractExtension
  */
-class ProfilerExtension extends \Twig_Extension
+class ProfilerExtension extends AbstractExtension
 {
     /**
      * __construct
@@ -28,9 +33,10 @@ class ProfilerExtension extends \Twig_Extension
      * Extension constructor.
      *
      * @access public
-     * @param  \Twig_Loader_Filesystem $loader
+     * @param FilesystemLoader $loader
+     * @throws LoaderError
      */
-    public function __construct(\Twig_Loader_Filesystem $loader)
+    public function __construct(FilesystemLoader $loader)
     {
         $loader->addPath($this->getTemplateDirectory(), 'Pomm');
     }
@@ -53,12 +59,12 @@ class ProfilerExtension extends \Twig_Extension
     /**
      * getFilters
      *
-     * @see \Twig_Extension
+     * @see AbstractExtension
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sql_format', function ($sql) {
+            new TwigFilter('sql_format', function ($sql) {
                 return \SqlFormatter::format($sql);
             }),
         ];
@@ -67,7 +73,7 @@ class ProfilerExtension extends \Twig_Extension
     /**
      * getName
      *
-     * @see \Twig_Extension
+     * @see AbstractExtension
      */
     public function getName()
     {

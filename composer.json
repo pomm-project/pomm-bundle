@@ -1,7 +1,7 @@
 {
   "name": "pomm-project/pomm-bundle",
   "type": "symfony-bundle",
-  "description": "The Symfony2 bundle for Pomm2",
+  "description": "The Symfony bundle for Pomm2",
   "keywords": ["orm", "postgresql", "database", "symfony", "pomm"],
   "homepage": "http://www.pomm-project.org",
   "license": "MIT",
@@ -21,7 +21,8 @@
     "pomm-project/model-manager": "~2.0",
     "pomm-project/cli": "~2.0",
     "pomm-project/pomm-symfony-bridge": "~2.5|~3.0",
-    "symfony/framework-bundle": "^3.4|^4.3|^5.0"
+    "symfony/framework-bundle": "^3.4|^4.3|^5.0",
+    "twig/twig": "^3.3"
   },
   "require-dev": {
     "symfony/console": "^3.4|^4.3|^5.0",
@@ -42,4 +43,3 @@
       }
   }
 }
-
