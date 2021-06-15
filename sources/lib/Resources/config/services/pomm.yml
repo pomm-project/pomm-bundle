@@ -36,13 +36,6 @@ services:
         tags:
             - { name: "property_info.type_extractor" }
         public: true
-    # @deprecated
-    pomm.property_info:
-        class: 'PommProject\SymfonyBridge\PropertyInfo\Extractor\PommExtractor'
-        arguments: ['@pomm']
-        tags:
-            - { name: "property_info.type_extractor" }
-        public: true
     pomm.session_builder:
         class: 'PommProject\Foundation\SessionBuilder'
     pomm.model_manager.session_builder:
