@@ -11,8 +11,8 @@ namespace PommProject\PommBundle\Model;
 
 use PommProject\Foundation\Client\ClientPooler;
 use PommProject\ModelManager\ModelLayer\ModelLayerPooler;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Psr\Container\ContainerInterface as PsrContainerInterface;
 
 /**
  * ModelLayerPooler
@@ -25,11 +25,11 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
  * @license   X11 {@link http://opensource.org/licenses/mit-license.php}
  * @see       ClientPooler
  */
-class ContainerModelLayerPooler extends ModelLayerPooler implements ContainerAwareInterface, ServiceMapInterface
+class ContainerModelLayerPooler extends ModelLayerPooler implements ServiceMapInterface
 {
-    use ContainerAwareTrait;
-
     private $serviceMap = [];
+    /** @var PsrContainerInterface|ContainerInterface */
+    private $container;
 
     /**
      * {@inheritdoc}
@@ -49,5 +49,18 @@ class ContainerModelLayerPooler extends ModelLayerPooler implements ContainerAwa
         }
 
         return parent::createClient($class);
+    }
+
+    /**
+     * @param PsrContainerInterface|ContainerInterface $container
+     */
+    public function setContainer($container)
+    {
+        if (!($container instanceof PsrContainerInterface) && !($container instanceof ContainerInterface)) {
+            throw new \InvalidArgumentException(
+                '$contaner should be instance of Symfony\Component\DependencyInjection\ContainerInterface or Psr\Container\ContainerInterface'
+            );
+        }
+        $this->container = $container;
     }
 }

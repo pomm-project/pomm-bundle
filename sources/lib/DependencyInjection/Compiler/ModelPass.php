@@ -30,6 +30,9 @@ class ModelPass implements DI\Compiler\CompilerPassInterface
         /** @var DI\Definition[] $definitions */
         $definitions = [];
 
+        $poolerToService = [];
+        $gteSf33 = version_compare(\Symfony\Component\HttpKernel\Kernel::VERSION, '3.3', '>=');
+
         // find all service IDs with the appropriate tag
         $taggedServices = $container->findTaggedServiceIds($tag);
 
@@ -49,29 +52,47 @@ class ModelPass implements DI\Compiler\CompilerPassInterface
                     if (!in_array($interface, class_implements($definitions[$serviceId]->getClass()), true)) {
                         throw new \RuntimeException(sprintf('Your pooler should implement %s.', $interface));
                     }
+
+                    $poolerToService[$serviceId] = [];
                 } else {
                     throw new \RuntimeException(sprintf('There is no pooler service with id %s.', $serviceId));
                 }
             }
 
-            $definitions[$serviceId]->addMethodCall('addModelToServiceMapping', [$class, $id . '.pomm.inner']);
+            $innerId = $id . '.pomm.inner';
+            $definitions[$serviceId]->addMethodCall('addModelToServiceMapping', [$class, $innerId]);
+            $poolerToService[$serviceId][$innerId] = new DI\Reference($innerId);
 
             $old = $container->getDefinition($id);
             $old->setPublic(true);
             $container->removeDefinition($id);
-            $container->addDefinitions([$id . '.pomm.inner' => $old]);
+            $container->addDefinitions([$innerId => $old]);
 
             $service = $container->register($id, $old->getClass())
                 ->setFactory([new DI\Reference($sessionId), $method])
                 ->addArgument($old->getClass())
             ;
 
-            if (version_compare(\Symfony\Component\HttpKernel\Kernel::VERSION, '3.3', '<')) {
-                $service->addAutowiringType($old->getClass());
+            if ($gteSf33) {
+                $service->setPublic($old->isPublic());
+                //there is no need for inner service to be public anymore, because only service locator uses it.
+                $old->setPublic(false);
+                //add alias with full class to be compatible with sf 4.0 autowiring
+                if ($id !== $class) {
+                    $container->setAlias($class, $id);
+                }
+            } else {
+                $service->setAutowiringTypes([$old->getClass()]); //set this one as a default for autowire
             }
+        }
 
-            if ($class !== $id) {
-                $container->setAlias($class, $id);
+        if ($gteSf33) {
+            foreach ($poolerToService as $service => $references) {
+                $container->getDefinition($service)
+                    ->removeMethodCall('setContaner')
+                    ->addMethodCall('setContainer', [
+                        DI\Compiler\ServiceLocatorTagPass::register($container, $references)
+                    ]);
             }
         }
     }
