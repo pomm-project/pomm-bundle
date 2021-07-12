@@ -2,3 +2,7 @@ _pomm_profiler_explain:
     path: '/explain/{token}/{index_query}'
     defaults: { _controller: 'pomm.controller.profiler:explainAction' }
     methods: [GET]
+_pomm_profiler_graph:
+    path: '/graph/{token}/{index_query}'
+    defaults: { _controller: 'pomm.controller.profiler:graphAction' }
+    methods: [GET]
