@@ -2,19 +2,17 @@
     "require": {
         "symfony/symfony": "^3.4|^4.3|^5.0",
         "symfony/monolog-bundle": "~3.0",
-        "twig/extensions": "~1.0",
         "sensio/framework-extra-bundle": "^3.4|^4.3|^5.0",
-        "pomm-project/cli": "~2.0",
-        "pomm-project/foundation": "~2.0",
-        "pomm-project/model-manager": "~2.0",
-        "pomm-project/pomm-symfony-bridge": "~2.5|dev-master",
+        "pomm-project/cli": "2.1.*@dev",
+        "pomm-project/foundation": "dev-master",
+        "pomm-project/model-manager": "2.1.*@dev",
+        "pomm-project/pomm-symfony-bridge": "3.0.*@dev",
         "symfony/framework-bundle": "^3.4|^4.3|^5.0",
         "jdorn/sql-formatter": "~1.2"
     },
     "require-dev": {
         "behatch/contexts": "~3.0",
-        "behat/mink-selenium2-driver": "dev-master",
-        "instaclick/php-webdriver": "1.4.7"
+        "behat/mink-selenium2-driver": "^1.7"
     },
     "autoload": {
         "psr-0": { "AppBundle\\": "src/" },
@@ -24,6 +22,8 @@
     "autoload-dev": {
         "files": ["tests/Features/bootstrap/FeatureContext.php"]
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "config": {
         "bin-dir": "bin"
     },
