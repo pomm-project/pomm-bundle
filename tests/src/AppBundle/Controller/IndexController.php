@@ -17,6 +17,7 @@ class IndexController
     private $templating;
     private $serializer;
     private $property;
+    private $serviceSession;
     private $serviceModel;
 
     public function __construct(
